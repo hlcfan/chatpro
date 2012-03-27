@@ -5,9 +5,55 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown();
+  </script>
 </head>
 <body>
-<%= yield %>
-
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="brand" href="#">
+        Chat Pro
+      </a>
+      <ul class="nav">
+        <li class="active">
+          <a href="/">首页</a>
+        </li>
+        <li>
+          <%=link_to "新建房间", new_room_path, :remote => true %>
+        </li>
+        <li class="divider-vertical"></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+      <p class="navbar-text">
+        <ul class="nav nav-pills pull-right">
+        <%if current_user%>
+          <li class="dropdown" id="menu1">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+              <%= current_user.email %>
+              <b class="caret"></b>              
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">我的主页</a></li>
+              <li><a href="#">个人资料设置</a></li>
+              <li class="divider"></li>
+              <li><%=link_to "退出", destroy_user_session_path %></li>
+            </ul>
+          </li>
+        <%else%>
+          请登录
+        <%end%>
+        </ul>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="margin-top:50px;">
+  <div class="row-fluid">
+    <%= yield %>
+  </div>
+</div>
+<div id="edit_form" style="z-index:10000;"></div>
 </body>
 </html>

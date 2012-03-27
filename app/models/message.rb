@@ -5,8 +5,9 @@ class Message
   # include Mongoid::SoftDelete
   # include Mongoid::BaseModel
 
-  field :sender, :type => String
+  #field :sender, :type => String
   field :body, :type => String
   belongs_to :room
+  belongs_to :user
 
 end

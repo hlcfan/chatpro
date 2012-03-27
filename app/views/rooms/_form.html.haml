@@ -1,0 +1,14 @@
+.modal{:style => "z-index:10000"}
+  .modal-header
+    %a.close{"data-dismiss" => "modal"} X
+    新建房间
+  .modal-body
+    = form_for @room do |f|
+      = f.label :名称
+      = f.text_field :name, :class => "input-xlarge"
+      = f.label :描述
+      = f.text_area :desc, :size => "100x10"
+      .field
+        = f.submit '创建'
+:javascript
+  $("#edit_form").modal();
