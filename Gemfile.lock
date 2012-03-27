@@ -1,5 +1,13 @@
+GIT
+  remote: git://github.com/anjlab/bootstrap-rails.git
+  revision: 028a81746f1f8958df59dfb068d57f2932ef767d
+  specs:
+    anjlab-bootstrap-rails (2.0.2.1)
+      railties (>= 3.0)
+      sass
+
 GEM
-  remote: https://rubygems.org/
+  remote: http://ruby.taobao.org/
   specs:
     actionmailer (3.2.2)
       actionpack (= 3.2.2)
@@ -29,6 +37,12 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
+    bcrypt-ruby (3.0.1)
+    bootstrap-will_paginate (0.0.6)
+      will_paginate
+    bson (1.6.1)
+    bson_ext (1.6.1)
+      bson (~> 1.6.1)
     builder (3.0.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -37,26 +51,59 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    devise (2.0.4)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.0.3)
+      railties (~> 3.1)
+      warden (~> 1.1.1)
     erubis (2.7.0)
     execjs (1.3.0)
       multi_json (~> 1.0)
+    haml (3.1.4)
+    hashie (1.2.0)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.3)
     jquery-rails (2.0.1)
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
-    json (1.6.5)
+    json (1.6.6)
+    juggernaut (2.1.1)
+      redis
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.18)
+    mongo (1.6.1)
+      bson (~> 1.6.1)
+    mongo-rails-instrumentation (0.2.4)
+    mongoid (2.4.7)
+      activemodel (~> 3.1)
+      mongo (~> 1.3)
+      tzinfo (~> 0.3.22)
+    mongoid_auto_increment_id (0.4.0)
+      mongoid (~> 2.4.0)
+    mongoid_rails_migrations (0.0.14)
+      activesupport (>= 3.0.0)
+      bundler (>= 1.0.0)
+      rails (>= 3.0.0)
+      railties (>= 3.0.0)
     multi_json (1.1.0)
+    omniauth (1.0.3)
+      hashie (~> 1.2)
+      rack
+    omniauth-openid (1.0.1)
+      omniauth (~> 1.0)
+      rack-openid (~> 1.3.1)
+    orm_adapter (0.0.7)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-openid (1.3.1)
+      rack (>= 1.1.0)
+      ruby-openid (>= 2.1.8)
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.1)
@@ -69,6 +116,8 @@ GEM
       activesupport (= 3.2.2)
       bundler (~> 1.0)
       railties (= 3.2.2)
+    rails-i18n (0.1.8)
+      i18n (~> 0.5)
     railties (3.2.2)
       actionpack (= 3.2.2)
       activesupport (= 3.2.2)
@@ -79,6 +128,8 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
+    redis (2.2.2)
+    ruby-openid (2.1.8)
     sass (3.1.15)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -97,13 +148,35 @@ GEM
     uglifier (1.2.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    warden (1.1.1)
+      rack (>= 1.0)
+    will_paginate (3.0.3)
+    will_paginate_mongoid (1.0.4)
+      bson_ext (~> 1.5)
+      mongoid (~> 2.4)
+      will_paginate (~> 3.0.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  anjlab-bootstrap-rails!
+  bootstrap-will_paginate
+  bson_ext (~> 1.5)
   coffee-rails (~> 3.2.1)
+  devise
+  haml
   jquery-rails
+  juggernaut
+  mongo-rails-instrumentation (= 0.2.4)
+  mongoid (~> 2.4)
+  mongoid_auto_increment_id (= 0.4.0)
+  mongoid_rails_migrations (~> 0.0.14)
+  omniauth (~> 1.0.1)
+  omniauth-openid (~> 1.0.1)
   rails (= 3.2.2)
+  rails-i18n (= 0.1.8)
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)
+  will_paginate
+  will_paginate_mongoid (~> 1.0.2)

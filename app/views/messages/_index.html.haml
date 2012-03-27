@@ -1,0 +1,17 @@
+<script src="http://182.201.163.11:8080/application.js" type="text/javascript" charset="utf-8"></script>
+#msg{:style => "width:806px;height:400px;border:#ccc solid 1px;overflow-y:scroll;"}
+  - msgs.each do |msg|
+    %p= msg.body
+= form_for Message.new, :remote => true do |f|
+  = hidden_field_tag(:room_id, room.id)
+  = f.text_field :body, {:style => "width:800px;"}
+
+:javascript
+  var jug = new Juggernaut;
+  $("#msg").animate({scrollTop: "10000000px"}, 100);
+  jug.subscribe("channel1", function(data){
+    console.log("Got data: " + data);
+    $("#msg").append("<p>"+ data +"</p>");
+    $("#msg").animate({scrollTop: "10000000px"}, 100);
+    $('#message_body').val('');
+  });

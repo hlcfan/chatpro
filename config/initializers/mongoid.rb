@@ -1,0 +1,1 @@
+Mongoid.add_language("*")
