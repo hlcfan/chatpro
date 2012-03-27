@@ -1,7 +1,7 @@
 <script src="http://182.201.163.11:8080/application.js" type="text/javascript" charset="utf-8"></script>
 #msg{:style => "width:806px;height:400px;border:#ccc solid 1px;overflow-y:scroll;"}
   - msgs.each do |msg|
-    %p= msg.user.email + ":" + msg.body
+    %p= msg.user.username + ":" + msg.body
 = form_for Message.new, :remote => true, :html => {:class => "form-horizontal"} do |f|
   = hidden_field_tag(:room_id, room.id)
   = f.text_field :body, {:class => "span2", :size => 16, :style => "width:655px;"}

@@ -1,1 +1,5 @@
-= render :partial => 'messages/index', :locals => {:msgs => @msgs, :room => @room } 
+.span9 
+  = render :partial => 'messages/index', :locals => {:msgs => @msgs, :room => @room }
+.span3
+  - @users_online.each do |user|
+    = user.email

@@ -9,11 +9,13 @@ class User
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+         
+  attr_accessor :login
   
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :login, :username, :email, :password, :password_confirmation
          
   ## Database authenticatable
-  field :name, :type => String, :null => false
+  field :username, :type => String, :null => false
   field :email,              :type => String, :null => false, :default => ""
   field :encrypted_password, :type => String, :null => false, :default => ""
 
@@ -30,23 +32,30 @@ class User
   field :last_sign_in_at,    :type => Time
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
+  field :online_status, :type => Integer, :default => 0
 
   
   field :location
   field :location_id, :type => Integer
   
-  index :name
+  index :username
   index :email
   index :location
   
-  def self.find_for_open_id(access_token, signed_in_resource=nil)
-  data = access_token.info
-  if user = User.where(:email => data["email"]).first
-    user
-  else
-    User.create!(:email => data["email"], :password => Devise.friendly_token[0,20])
+  def self.find_for_database_authentication(conditions)
+    login = conditions.delete(:login)
+    self.any_of({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i }).first
   end
-end
+  
+  def self.find_for_open_id(access_token, signed_in_resource=nil)
+    data = access_token.info
+    if user = User.where(:email => data["email"]).first
+      user
+    else
+      User.create!(:email => data["email"], :password => Devise.friendly_token[0,20])
+    end
+  end
+    
   ## Encryptable
   # field :password_salt, :type => String
 

@@ -7,6 +7,7 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     @msgs = @room.messages
+    @users_online = User.where(:online_status => 1).to_a
   end
   
   def new

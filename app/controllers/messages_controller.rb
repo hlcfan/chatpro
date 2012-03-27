@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
     @msg.room_id = params[:room_id]
     @msg.user_id = current_user.id
     if @msg.save
-      Juggernaut.publish(@msg.room_id, @msg.user.email + ":" + @msg.body)
+      Juggernaut.publish(@msg.room_id, @msg.user.username + ":" + @msg.body)
     end
   end
 end
