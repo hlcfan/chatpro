@@ -24,6 +24,7 @@ gem "omniauth", "~> 1.0.1"
 #gem "omniauth-twitter", "~> 0.0.7"
 #gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
 
+gem 'kramdown'
 gem 'haml'
 gem 'juggernaut'
 gem 'devise'

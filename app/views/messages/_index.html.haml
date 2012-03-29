@@ -1,17 +1,116 @@
-<script src="http://182.201.163.11:8080/application.js" type="text/javascript" charset="utf-8"></script>
-#msg{:style => "width:806px;height:400px;border:#ccc solid 1px;overflow-y:scroll;"}
+#msg{:style => "padding-bottom:120px;position:relative"}
   - msgs.each do |msg|
-    %p= msg.user.username + ":" + msg.body
+    .piece
+      %a.signature= msg.user.username      
+      - if msg.user.username == "#{current_user.username}"
+        .messages.mine{:id => "msg-#{msg.id}" }
+          = raw msg.body 
+          .holder
+            %a{:href => "/vote/#{msg.id}", "data-remote" => "true"} 赞
+      - else
+        .messages
+          = raw msg.body
+          .holder
+            %a{:href => "#"} ★
 = form_for Message.new, :remote => true, :html => {:class => "form-horizontal"} do |f|
   = hidden_field_tag(:room_id, room.id)
-  = f.text_field :body, {:class => "span2", :size => 16, :style => "width:655px;"}
+  = f.text_area :body, {:class => "span2", :cols => 40, :rows => 5, :style => "width:71.3%;position:fixed;bottom:0;left:0;z-index: 5;"}
 
 :javascript
   var jug = new Juggernaut;
-  $("#msg").animate({scrollTop: "10000000px"}, 100);
+  //$("#msg").height( $("#msg").height() + $("#msg .piece:last-child .messages").height() - 500);    
+  $("html body").animate({scrollTop: "999999px"}, 100);  
   jug.subscribe("#{@room.id}", function(data){
-    console.log("Got data: " + data);
-    $("#msg").append("<p>" + data +"</p>");
-    $("#msg").animate({scrollTop: "10000000px"}, 100);
-    $('#message_body').val('');
+    console.log("Got data: " + data["username"].indexOf("hlcfan") + data["msg"] + "#{current_user.username}");
+    if(data["username"]=="#{current_user.username}")
+    {
+      $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages mine'>" + data["msg"] + "<div class='holder'><a href='#'>★</a></div>" +"</div>" + "</div>");    
+    }
+    else
+    {
+    $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages'>" + data["msg"] + "<div class='holder'><a href='#'>★</a></div>" + "</div>" + "</div>");    
+    }
+    //$("#msg").height( $("#msg").height() + $("#msg .piece:last-child .messages").height());
+    $("html body").animate({scrollTop: "999999px"}, 100);    
+    if(data["username"].indexOf(String("#{current_user.username}")) >= 0){
+      $('#message_body').val('');
+      }
+  }); 
+
+  $("#message_body").keypress(function(e)    
+  {    
+    if(e.which == 13 && !e.shiftKey)
+    {
+      $("form").submit();
+    }
+  });  
+
+  $(".messages").hover(function(){     
+    id = $(this).attr("id");    
+    new_filter = "#"+ id + " .holder"     
+    $(new_filter).show();
+  }).mouseleave(function(){
+    $(".holder").hide();
   });
+
+  // $(window).unload(function(e) {       
+  //   window.location = "/leave/#{@room.id}";
+  // });
+
+
+:css
+  .piece
+  {
+    clear: both;
+    margin-bottom: 3px;
+    padding-top: 5px;
+    min-width: 400px;
+    height:auto;
+  }
+  .signature
+  {
+    width: 5%;
+    float: left;
+    margin: 0px 1% 0px 0px;
+    text-align: right;
+    word-wrap: break-word;
+    padding-top: 5px;    
+  }
+  .messages
+  {
+    background-color: #F6F6F6;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    padding: 5px 5px 5px 5px;
+    float: left;
+    word-wrap: break-word;
+    width: 91%;
+    color: #222;        
+    position:relative;
+  }
+  .messages p
+  {
+    margin:0;
+    width:95%;    
+  }
+  .mine
+  {
+    background-color: #FBF2D9;
+  }
+  .messages .holder
+  {        
+    position:absolute;
+    right:0;
+    top:5px;
+    z-index: 1;
+    width:25px;    
+    height:25px;
+    display:none;
+  }
+  .messages .holder a
+  {
+    position:relative;
+    display:block;
+    color:#333;
+  }

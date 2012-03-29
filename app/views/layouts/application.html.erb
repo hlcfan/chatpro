@@ -4,21 +4,22 @@
   <title>Chatpro</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "http://#{JUGGERNAUT_SERVER}:8080/application.js" %>
   <%= csrf_meta_tags %>
   <script type="text/javascript">
-    $('.dropdown-toggle').dropdown();
+    $('.dropdown-toggle').dropdown();   
   </script>
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container-fluid">
-      <a class="brand" href="#">
+      <a class="brand" href=<%=root_path%>>
         Chat Pro
       </a>
       <ul class="nav">
         <li class="active">
-          <a href="/">首页</a>
+          <%= link_to "起始", root_path%>
         </li>
         <li>
           <%=link_to "新建房间", new_room_path, :remote => true %>
@@ -42,7 +43,7 @@
             </ul>
           </li>
         <%else%>
-          请登录
+          <%= link_to "请登录", new_user_session_path %>
         <%end%>
         </ul>
       </p>

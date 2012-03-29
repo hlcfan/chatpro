@@ -9,6 +9,9 @@ Chatpro::Application.routes.draw do
   resources :messages
   
   resources :rooms
+  
+  match "/leave/:room_id" => 'rooms#leave'
+  match "/vote/:msg_id" => 'messages#vote'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -38,6 +38,9 @@ class User
   field :location
   field :location_id, :type => Integer
   
+  has_and_belongs_to_many :rooms, :class_name => 'Room', :inverse_of => :current_room_users
+  has_and_belongs_to_many :vote_messages, :class_name => 'Message', :index => true, :inverse_of => :vote_users
+  
   index :username
   index :email
   index :location
