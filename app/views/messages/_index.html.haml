@@ -1,34 +1,35 @@
 #msg{:style => "padding-bottom:120px;position:relative"}
+  = will_paginate(@msgs, :page_links =>false, :default => 5)
   - msgs.each do |msg|
     .piece
       %a.signature= msg.user.username      
       - if msg.user.username == "#{current_user.username}"
         .messages.mine{:id => "msg-#{msg.id}" }
-          = raw msg.body 
+          = msg.body
           .holder
             %a{:href => "/vote/#{msg.id}", "data-remote" => "true"} 赞
       - else
         .messages
-          = raw msg.body
+          = msg.body
           .holder
-            %a{:href => "#"} ★
+            %a{:href => "#"} 赞  
 = form_for Message.new, :remote => true, :html => {:class => "form-horizontal"} do |f|
   = hidden_field_tag(:room_id, room.id)
   = f.text_area :body, {:class => "span2", :cols => 40, :rows => 5, :style => "width:71.3%;position:fixed;bottom:0;left:0;z-index: 5;"}
 
-:javascript
-  var jug = new Juggernaut;
+:javascript  
+  var jug = new Juggernaut;  
   //$("#msg").height( $("#msg").height() + $("#msg .piece:last-child .messages").height() - 500);    
   $("html body").animate({scrollTop: "999999px"}, 100);  
   jug.subscribe("#{@room.id}", function(data){
-    console.log("Got data: " + data["username"].indexOf("hlcfan") + data["msg"] + "#{current_user.username}");
+    console.log("Got data: " + data["username"].indexOf("hlcfan") + String(data["msg"]) + "#{current_user.username}");
     if(data["username"]=="#{current_user.username}")
     {
       $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages mine'>" + data["msg"] + "<div class='holder'><a href='#'>★</a></div>" +"</div>" + "</div>");    
     }
     else
     {
-    $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages'>" + data["msg"] + "<div class='holder'><a href='#'>★</a></div>" + "</div>" + "</div>");    
+      $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages'>" + data["msg"] + "<div class='holder'><a href='#'>★</a></div>" + "</div>" + "</div>");    
     }
     //$("#msg").height( $("#msg").height() + $("#msg .piece:last-child .messages").height());
     $("html body").animate({scrollTop: "999999px"}, 100);    
@@ -52,7 +53,6 @@
   }).mouseleave(function(){
     $(".holder").hide();
   });
-
   // $(window).unload(function(e) {       
   //   window.location = "/leave/#{@room.id}";
   // });

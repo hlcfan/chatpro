@@ -24,7 +24,11 @@ gem "omniauth", "~> 1.0.1"
 #gem "omniauth-twitter", "~> 0.0.7"
 #gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
 
-gem 'kramdown'
+# Markdown 格式
+gem 'redcarpet'
+gem 'hpricot', '~> 0.8.5'
+gem "pygments.rb", '~> 0.2.4'
+
 gem 'haml'
 gem 'juggernaut'
 gem 'devise'

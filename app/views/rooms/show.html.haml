@@ -11,4 +11,4 @@
       %li.nav-header 热门回复
       - @hot_replies.each do |reply|
         %li 
-          =link_to raw(reply.body[0,30].gsub(/<\/?.*?>/, "")), "#"
+          =link_to reply.body, "##{reply.id}"
