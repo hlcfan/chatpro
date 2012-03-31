@@ -1,6 +1,5 @@
-/=debug session["2_#{current_user}"]
-= form_tag("/verify", :method => "post") do	
+= form_tag("/verify", :method => "post") do
 	= hidden_field_tag :id, "#{@room.id}"
 	= label_tag :password, :请输入该房间密码
 	= text_field_tag :password
-	= submit_tag("进入房间")
+	= submit_tag "进入房间", {:class => "btn btn-success", :style => "vertical-align: baseline;" }

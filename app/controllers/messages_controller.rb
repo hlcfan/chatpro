@@ -14,7 +14,8 @@ class MessagesController < ApplicationController
     @msg.user_id = current_user.id
     if @msg.save      
       Juggernaut.publish(@msg.room_id, { :username => @msg.user.username, :msg => @msg.body, :timestamp => @msg.created_at.strftime("%H:%M") })
-    end    
+    end
+    render :text => "ok"   
   end
 
   def vote

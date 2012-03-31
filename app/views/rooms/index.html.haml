@@ -1,7 +1,7 @@
 %ul.thumbnails
   - @rooms.each do |room|
     %li.span3
-      %a.thumbnail{:href => room_path(room)}
+      %a.thumbnail{:href => room_path(room) }
         %img{:alt => "", :src => "http://placehold.it/260x180"}
         %h5 #{room.name}
         %p #{room.desc} 
