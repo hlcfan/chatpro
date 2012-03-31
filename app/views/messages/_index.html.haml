@@ -1,5 +1,8 @@
 #msg{:style => "padding-bottom:120px;position:relative"}
-  = will_paginate(@msgs, :page_links =>false, :default => 5)
+  /=debug session.to_a
+  /=debug session["1_#{current_user}"]
+  /=debug current_user.email + params[:room_id]
+  /= will_paginate(@msgs, :page_links =>false, :default => 5)
   - msgs.each do |msg|
     .piece
       %a.signature= msg.user.username      
