@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'juggernaut'
 
 class MessagesController < ApplicationController  
@@ -9,11 +10,16 @@ class MessagesController < ApplicationController
   
   def create
     @msg = Message.new
-    @msg.body = params[:message][:body]
+    @msg.body = link_mention_user params[:message][:body]
     @msg.room_id = params[:room_id]
     @msg.user_id = current_user.id
+    users_online = []
+    @msg.room.users.each do |user|
+      users_online << user.username  
+    end
+    
     if @msg.save      
-      Juggernaut.publish(@msg.room_id, { :username => @msg.user.username, :msg => @msg.body, :timestamp => @msg.created_at.strftime("%H:%M") })
+      Juggernaut.publish(@msg.room_id, { :username => @msg.user.username, :msg => blacklist(markdown(@msg.body)), :timestamp => @msg.created_at.strftime("%H:%M"), :online => users_online })
     end
     render :text => "ok"   
   end
@@ -33,10 +39,40 @@ class MessagesController < ApplicationController
   def markdown(text)    
     assembler = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
     :autolink => true, :filter_html => true, :hard_wrap => true)
-    if text.include?("<input")
-      text
-    else
-      assembler.render(text).html_safe
-    end
+      assembler.render(text)  
   end
+
+  DISALLOWED_TAGS = %w(script iframe input form) unless defined?(DISALLOWED_TAGS)
+
+  def blacklist(html)
+    # only do this if absolutely necessary    
+    if html.index("<")
+      tokenizer = HTML::Tokenizer.new(html)
+      new_text = ""
+
+      while token = tokenizer.next
+        node = HTML::Node.parse(nil, 0, 0, token, false)
+        new_text << case node
+                    when HTML::Tag
+                      if DISALLOWED_TAGS.include?(node.name)
+                        node.to_s.gsub(/</, "&LT;")
+                      else
+                        node.to_s
+                      end
+                    else
+                      node.to_s.gsub(/</, "&LT;")
+                    end
+      end
+
+      html = new_text
+    end
+    html
+  end
+
+  private
+    def link_mention_user(text)
+      text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) { 
+        %(#{$1}<a href="/users/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
+      }
+    end
 end

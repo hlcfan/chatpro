@@ -5,9 +5,9 @@
   .well.sidebar-nav
     %ul.nav.nav-list
       %li.nav-header 在线用户
-      - @users_online.each do |user|
+      - @users_online.each do |username|
         %li 
-          =link_to user.username, "#"
+          =link_to username, "#"
       %li.nav-header 热门回复
       - @hot_replies.each do |reply|
         %li 

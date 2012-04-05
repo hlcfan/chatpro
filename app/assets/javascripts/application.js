@@ -15,3 +15,4 @@
 //= require_tree .
 //= require bootstrap-modal
 //= require bootstrap-dropdown
+//= require jquery.atwho

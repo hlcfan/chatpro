@@ -12,4 +12,5 @@
  *= require_tree .
  *= require bootstrap
  *= require responsive
+ *= require jquery.atwho
 */

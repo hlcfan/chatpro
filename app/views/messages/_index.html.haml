@@ -2,37 +2,42 @@
   /=debug session.to_a
   /=debug session["1_#{current_user}"]
   /=debug current_user.email + params[:room_id]
-  /= will_paginate(@msgs, :page_links =>false, :default => 5)
-  - msgs.each do |msg|
+  = will_paginate(@msgs, :renderer => "MyLinkRenderer", :page_links =>false)
+  - msgs.reverse.each do |msg|
     .piece
       %a.signature= msg.user.username      
       - if msg.user.username == "#{current_user.username}"
         .messages.mine{:id => "msg-#{msg.id}" }
-          = msg.body
+          = raw blacklist markdown(msg.body)
           .holder
             %a{:href => "/vote/#{msg.id}", "data-remote" => "true"} 赞
       - else
         .messages
-          = msg.body
+          = raw blacklist markdown(msg.body)
           .holder
             %a{:href => "#"} 赞  
 = form_for Message.new, :remote => true, :html => {:class => "form-horizontal"} do |f|
   = hidden_field_tag(:room_id, room.id)
-  = f.text_area :body, {:class => "span2", :cols => 40, :rows => 5, :style => "width:71.3%;position:fixed;bottom:0;left:0;z-index: 5;"}
+  = f.text_area :body, {:class => "span2", :cols => 40, :rows => 5, :style => "width:71.3%;position:fixed;bottom:0;left:0;"}
 
 :javascript  
-  var jug = new Juggernaut;  
+  var online_users = #{@users_online}
+
+  console.log("Online_Users:" + online_users);
+  var jug = new Juggernaut(function(){console.log("initialize done")});
   //$("#msg").height( $("#msg").height() + $("#msg .piece:last-child .messages").height() - 500);    
   $("html body").animate({scrollTop: "999999px"}, 100);  
   jug.subscribe("#{@room.id}", function(data){
-    console.log("Got data: " + data["username"].indexOf("hlcfan") + String(data["msg"]) + "#{current_user.username}");
+    console.log("Got data: " + data["username"].indexOf("hlcfan") + String(data["msg"]) + "#{current_user.username}" + "online:" + data["online"]);
+    var online_users = data["online"]
+    //$("textarea").atWho("@",{'debug':true,'data':online_users} );  
     if(data["username"]=="#{current_user.username}")
     {
-      $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages mine'>" + data["msg"] + "<div class='holder'><a href='#'>★</a></div>" +"</div>" + "</div>");    
+      $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages mine'>" + data["msg"] + "<div class='holder'><a href='#'>赞</a></div>" +"</div>" + "</div>");    
     }
     else
     {
-      $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages'>" + data["msg"] + "<div class='holder'><a href='#'>★</a></div>" + "</div>" + "</div>");    
+      $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages'>" + data["msg"] + "<div class='holder'><a href='#'>赞</a></div>" + "</div>" + "</div>");    
     }
     //$("#msg").height( $("#msg").height() + $("#msg .piece:last-child .messages").height());
     $("html body").animate({scrollTop: "999999px"}, 100);    
@@ -40,6 +45,8 @@
       $('#message_body').val('');
       }
   }); 
+
+  $("textarea").atWho("@",{'debug':true,'data':online_users} );  
 
   $("#message_body").keypress(function(e)    
   {    
@@ -56,10 +63,11 @@
   }).mouseleave(function(){
     $(".holder").hide();
   });
-  // $(window).unload(function(e) {       
-  //   window.location = "/leave/#{@room.id}";
-  // });
-
+  $(window).unload(function(e) {       
+    $.get("/leave/#{@room.id}",{room_id:#{@room.id}} );
+    //alert('aa');    
+  });
+    
 
 :css
   .piece

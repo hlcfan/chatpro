@@ -44,6 +44,19 @@ class User
   index :username
   index :email
   index :location
+
+  has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
+
+  def read_notifications(notifications)
+    unread_ids = notifications.find_all{|notification| !notification.read?}.map(&:_id)
+    if unread_ids.any?
+      Notification::Base.where({
+        :user_id => id,
+        :_id.in  => unread_ids,
+        :read    => false
+      }).update_all(:read => true)
+    end
+  end
   
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
