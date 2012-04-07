@@ -13,13 +13,19 @@ class MessagesController < ApplicationController
     @msg.body = link_mention_user params[:message][:body]
     @msg.room_id = params[:room_id]
     @msg.user_id = current_user.id
+    username = @msg.user.username
     users_online = []
+    notify_flag = false
+    #notifications = []
     @msg.room.users.each do |user|
-      users_online << user.username  
+      users_online << user.username 
     end
     
-    if @msg.save      
-      Juggernaut.publish(@msg.room_id, { :username => @msg.user.username, :msg => blacklist(markdown(@msg.body)), :timestamp => @msg.created_at.strftime("%H:%M"), :online => users_online })
+    if @msg.save    
+      # current_user.notifications.each do |notify|
+      #   notifications << notify.user_id
+      # end      
+      Juggernaut.publish(@msg.room_id, { :username => username, :msg_id => @msg.id, :msg => blacklist(markdown(@msg.body)), :timestamp => @msg.created_at.strftime("%H:%M"), :online => users_online, :notify_users => @msg.mentioned_user_ids })
     end
     render :text => "ok"   
   end
@@ -68,15 +74,14 @@ class MessagesController < ApplicationController
     end
     html
   end
-
-  private
-    def link_mention_user(text)
-      if text.include?("@")
-        text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) { 
-          %(#{$1}<a href="/users/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
-        }
-      else
-        text
-      end
+  
+  def link_mention_user(text)
+    if text.include?("@")
+      text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) { 
+        %(#{$1}<a href="/users/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
+      }
+    else
+      text
     end
+  end
 end

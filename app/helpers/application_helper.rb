@@ -1,6 +1,6 @@
 # coding: utf-8
 module ApplicationHelper
-	def markdown(text)		
+	def markdown(text)
 		assembler = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
     :autolink => true, :filter_html => true, :hard_wrap => true)	  
 			assembler.render(text)		

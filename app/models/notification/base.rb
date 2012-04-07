@@ -1,7 +1,7 @@
 class Notification::Base
   include Mongoid::Document
   include Mongoid::Timestamps::Created
-  #include Mongoid::BaseModel
+  include Mongoid::BaseModel
 
   store_in :notifications
 

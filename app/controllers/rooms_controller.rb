@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
   def show    
     @room = Room.find(params[:id])
     if session["#{params[:id]}_#{current_user.email}"] == 1 || @room.password.nil? || @room.password == ""
-      @msgs = @room.messages.order(:_id => :desc).paginate(:page => params[:page], :per_page => 10)
+      @msgs = @room.messages.order(:_id => :desc).paginate(:page => params[:page], :per_page => 30)
       @page = @room.messages.length/20 + 1 
       @room.user_ids.append(current_user.id)
       @room.save

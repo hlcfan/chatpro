@@ -4,7 +4,7 @@ class Message
   include Mongoid::Document
   include Mongoid::Timestamps
   # include Mongoid::SoftDelete
-  # include Mongoid::BaseModel
+  include Mongoid::BaseModel
 
   #field :sender, :type => String
   field :body, :type => String  
@@ -19,13 +19,13 @@ class Message
   attr_accessible :body
   validates_presence_of :body
 
-  # before_save :extract_mentioned_users
-  # def extract_mentioned_users
-  #   usernames = self.body.scan(/@(\w{3,20})/).flatten
-  #   if usernames.any?
-  #     self.mentioned_user_ids = User.where(:username => /^(#{usernames.join('|')})$/i).limit(5).only(:_id).map(&:_id).to_a
-  #   end
-  # end
+  before_save :extract_mentioned_users
+  def extract_mentioned_users
+    usernames = body.scan(/@(\w{3,20})/).flatten
+    if usernames.any?
+      self.mentioned_user_ids = User.where(:username => /^(#{usernames.join('|')})$/i).limit(5).only(:_id).map(&:_id).to_a
+    end
+  end
 
   ## kind of no throught
   # def mentioned_user_names
@@ -36,12 +36,12 @@ class Message
   #   end
   # end
 
-  # after_create :send_mention_notification #, :send_topic_reply_notification
-  # def send_mention_notification
-  #   self.mentioned_user_ids.each do |user_id|
-  #     Notification::Mention.create :user_id => user_id, :reply => self
-  #   end
-  # end
+  after_create :send_mention_notification #, :send_topic_reply_notification
+  def send_mention_notification
+    self.mentioned_user_ids.each do |user_id|
+      Notification::Mention.create :user_id => user_id, :message => self
+    end
+  end
 
   # def send_topic_reply_notification
   #   if self.user != topic.user && !mentioned_user_ids.include?(topic.user_id)
