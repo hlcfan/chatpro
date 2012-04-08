@@ -29,7 +29,7 @@
           = f.text_area :body, {:class => "span2", :cols => 40, :rows => 5, :style => "width:520px;"}
       %td
         #notifications
-          没有人回复你哦
+          Markdown Supported
 
 :javascript  
   var online_users = #{@users_online}
@@ -90,7 +90,7 @@
     id = $(this).attr("id");    
     new_filter = "#"+ id + " .holder"     
     $(new_filter).show();
-  }).mouseleave(function(){
+  }).live("mouseleave",function(){
     $(".holder").hide();
   });
 
