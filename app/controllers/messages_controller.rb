@@ -77,7 +77,7 @@ class MessagesController < ApplicationController
   
   def link_mention_user(text)
     if text.include?("@")
-      text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20})/io) { 
+      text.gsub!(/(^|[^a-zA-Z0-9_!#\$%&*@＠])@([a-zA-Z0-9_]{1,20}|.+)/io) { 
         %(#{$1}<a href="/users/#{$2}" class="at_user" title="@#{$2}"><i>@</i>#{$2}</a>)
       }
     else
