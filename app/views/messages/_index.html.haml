@@ -31,20 +31,18 @@
       %td
         #notifications
           Markdown Supported
+#loading
+  Loading
 
 :javascript  
   var online_users = #{@users_online}
-
   console.log("Online_Users:" + online_users);
   var jug = new Juggernaut(function(){console.log("initialize done")});
-  //$("#msg").height( $("#msg").height() + $("#msg .piece:last-child .messages").height() - 500);    
-  $("html body").animate({scrollTop: "999999px"}, 100);  
   jug.subscribe("#{@room.id}", function(data){
     console.log("Got data: " +data["username"] + "|" + data["msg"] + "#{current_user.username}" + "online:" + data["online"]);
     var online_users = data["online"];
     var flag = false;
-    console.log(data["msg_id"] + "|" + data["notify_users"]);
-    //$("#notifications").html("<div>" + data["notify_users"] + "</div>");
+    console.log(data["msg_id"] + "|" + data["notify_users"]);    
     for( i in data["notify_users"] )
     {
       if ("#{current_user.id}" == data["notify_users"][i])   
@@ -70,11 +68,11 @@
       "<a href='/vote/" + data["msg_id"]+ "' data-remote='true'>赞</a>" +
       "<a href='#'' class='rt' id=" + data["username"] + ">回</a></div>" +"</div>" + "</div>");
     }
-    //$("#msg").height( $("#msg").height() + $("#msg .piece:last-child .messages").height());
-    $("html body").animate({scrollTop: "999999px"}, 100);    
+    $("#msg .piece:last-child .messages")[0].parentElement.style.height=$("#msg .piece:last-child .messages").height()+"px";    
+    $("#msg .piece:last-child .messages")[0].scrollIntoView();
     if(data["username"].indexOf(String("#{current_user.username}")) >= 0){
       $('#message_body').val('');
-      }
+    }
   }); 
 
   $("textarea").atWho("@",{'debug':true,'data':online_users} );  
@@ -105,7 +103,11 @@
     $.get("/leave/#{@room.id}",{room_id:#{@room.id}} );
     //alert('aa');    
   });
-    
+  $(document).ready(function(){
+      $("#msg .piece:last-child .messages")[0].parentElement.style.height=$("#msg .piece:last-child .messages").height()+"px";
+      $("#msg .piece:last-child .messages")[0].scrollIntoView();
+      $("#loading").hide();
+  });
 
 :css
   .piece
@@ -164,4 +166,17 @@
   .messages .holder a
   {
     color:#333;
+  }
+  #loading
+  {
+    position: fixed;
+    width:30%;
+    height:20%;
+    top: 35%;
+    left: 35%;
+    background: white;
+    background: rgba(255, 255, 255, 0.95);
+    -moz-box-shadow: 0 1px 10px #9c9c9c;
+    -webkit-box-shadow: 0 1px 10px #9c9c9c;
+    box-shadow: 0 1px 10px #9c9c9c;
   }
