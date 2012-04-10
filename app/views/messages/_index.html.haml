@@ -37,7 +37,7 @@
 :javascript  
   var online_users = #{@users_online}
   console.log("Online_Users:" + online_users);
-  var jug = new Juggernaut(function(){console.log("initialize done")});
+  var jug = new Juggernaut();
   jug.subscribe("#{@room.id}", function(data){
     console.log("Got data: " +data["username"] + "|" + data["msg"] + "#{current_user.username}" + "online:" + data["online"]);
     var online_users = data["online"];
