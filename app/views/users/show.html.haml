@@ -1,0 +1,57 @@
+%h1
+	= link_to @user.username, user_path(@user)
+.avatar
+	=image_tag("http://www.gravatar.com/avatar/941056da1db23b2c0081e9c8d9416574?s=128&amp;d=identicon&amp;r=PG", :width => "128", :height => "128")	
+.left
+	%table
+		- unless @user.website.empty?
+			%tr
+				%td
+					Website:
+				%td
+					#{@user.website}
+		- unless @user.email.empty?					
+			%tr
+				%td
+					Email:
+				%td
+					#{@user.email}
+		- unless @user.facebook_id.empty?					
+			%tr
+				%td
+					Facebook:
+				%td
+					#{@user.facebook_id}
+		- unless @user.twitter_id.empty?					
+			%tr
+				%td
+					Twitter:
+				%td
+					#{@user.twitter_id}
+		- unless @user.github_id.empty?					
+			%tr
+				%td
+					Github:
+				%td
+					#{@user.github_id}
+		- unless @user.googleplus_id.empty?					
+			%tr
+				%td
+					G +:
+				%td
+					#{@user.googleplus_id}
+		- unless @user.stackoverflow_id.empty?					
+			%tr
+				%td
+					StackOverFlow:
+				%td
+					#{@user.stackoverflow_id}
+		- unless @user.weibo_id.empty?					
+			%tr
+				%td
+					Weibo:
+				%td
+					#{@user.weibo_id}
+.right
+	.about-me 
+		#{@user.intro}

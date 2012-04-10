@@ -2,7 +2,8 @@
   /=debug session.to_a
   /=debug session["1_#{current_user}"]
   /=debug current_user.email + params[:room_id]
-  = will_paginate(@msgs, :renderer => "MyLinkRenderer", :page_links =>false)
+  = will_paginate(@msgs, :page_links =>false) 
+  /:renderer => "MyLinkRenderer", 
   - msgs.reverse.each do |msg|
     .piece
       %a.signature= msg.user.username      

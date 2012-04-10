@@ -36,8 +36,8 @@
               <b class="caret"></b>              
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#">我的主页</a></li>
-              <li><a href="#">个人资料设置</a></li>
+              <li><%= link_to "我的主页", user_path(current_user) %></li>
+              <li><%= link_to "个人资料设置", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li><%=link_to "退出", destroy_user_session_path %></li>
             </ul>

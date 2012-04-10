@@ -17,6 +17,16 @@ class User
   ## Database authenticatable
   field :username, :type => String, :null => false
   field :email,              :type => String, :null => false, :default => ""
+  field :twitter_id, :type => String, :default => "" 
+  field :facebook_id, :type => String, :default => ""
+  field :github_id, :type => String, :default => ""
+  field :googleplus_id, :type => String, :default => ""
+  field :stackoverflow_id, :type => String , :default => ""
+  field :website, :type => String , :default => ""
+  field :weibo_id, :type => String , :default => ""
+  field :intro, :type => String , :default => ""
+  field :custom_ids, :type => Array, :default => []
+
   field :encrypted_password, :type => String, :null => false, :default => ""
 
   ## Recoverable

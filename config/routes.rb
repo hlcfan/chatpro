@@ -9,6 +9,8 @@ Chatpro::Application.routes.draw do
   resources :messages
   
   resources :rooms  
+  resources :users
+
   
   match "/leave/:room_id" => 'rooms#leave'
   get "/goto/:id" => 'rooms#goto'
