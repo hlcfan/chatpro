@@ -49,7 +49,7 @@ class User
   field :location_id, :type => Integer
   
   has_many :admin_rooms, :class_name => 'Room'
-  has_and_belongs_to_many :fav_rooms, :class_name => 'Room', :inverse_of => :fav_rooms
+  has_and_belongs_to_many :fav_rooms, :class_name => 'Room', :index => true, :inverse_of => :fav_rooms
   has_and_belongs_to_many :rooms, :class_name => 'Room', :inverse_of => :current_room_users
   has_and_belongs_to_many :vote_messages, :class_name => 'Message', :index => true, :inverse_of => :vote_users
   

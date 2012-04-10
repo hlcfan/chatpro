@@ -54,6 +54,11 @@ class RoomsController < ApplicationController
     redirect_to root_path    
   end
 
+  def show_fav
+    @favs = current_user.fav_rooms
+    
+  end
+
   def leave
     @room = Room.find(params[:room_id])
     @room.user_ids.delete(current_user.id)
