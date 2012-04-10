@@ -19,13 +19,13 @@
       </a>
       <ul class="nav">
         <li class="active">
-          <%= link_to "起始", root_path%>
+          <%= link_to "Start", root_path%>
         </li>
         <li>
-          <%=link_to "新建房间", new_room_path, :remote => true %>
+          <%=link_to "New Room", new_room_path, :remote => true %>
         </li>
         <li class="divider-vertical"></li>
-        <li><a href="#">Link</a></li>
+        <li><a href="#">My Favs</a></li>
       </ul>
       <p class="navbar-text">
         <ul class="nav nav-pills pull-right">
@@ -36,14 +36,14 @@
               <b class="caret"></b>              
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "我的主页", user_path(current_user) %></li>
-              <li><%= link_to "个人资料设置", edit_user_path(current_user) %></li>
+              <li><%= link_to "Home Page", user_path(current_user) %></li>
+              <li><%= link_to "Profile Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>
-              <li><%=link_to "退出", destroy_user_session_path %></li>
+              <li><%=link_to "Logout", destroy_user_session_path %></li>
             </ul>
           </li>
         <%else%>
-          <%= link_to "请登录", new_user_session_path %>
+          <%= link_to "Login First", new_user_session_path %>
         <%end%>
         </ul>
       </p>
@@ -51,8 +51,7 @@
   </div>
 </div>
 <div class="container-fluid" style="margin-top:50px;">
-  <div class="row-fluid">
-    <div class="flash notice" style="background-color: #FFEFC6;height:30px;"></div>
+  <div class="row-fluid">    
     <%= yield %>
   </div>
 </div>

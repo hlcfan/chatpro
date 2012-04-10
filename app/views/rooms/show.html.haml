@@ -1,14 +1,20 @@
 .span9   
   = render :partial => 'messages/index', :locals => {:msgs => @msgs, :room => @room }
-.span3{:style => "position:fixed;right:20px;"}
-  =link_to "离开", "/leave/#{@room.id}", {:class => "btn btn-danger", :id => "leave"}  
+.span3{:style => "position:fixed;right:20px;"}  
+  =link_to "◄ Leave", "/leave/#{@room.id}", {:class => "btn btn-warning", :id => "leave"}  
+  - if @room.user_id == current_user.id
+    =link_to "✎ Delete Room", room_path(@room), :confirm => 'Are you sure to DELETE this room?', :method => :delete, :class => ".btn-mini btn-danger", :style => "float:right;"
+  - else
+    - if current_user.fav_room_ids.include?(@room.id)
+      =link_to "❤ Unfav It","/rooms/#{@room.id}/unfav/" ,{:class => "btn", :style => "float:right;"}
+    - else      
+      =link_to "❤ Fav It","/rooms/#{@room.id}/fav/" ,{:class => "btn btn-success", :style => "float:right;"}  
+  - if @room.user.id == current_user.id
+    .well.sidebar-nav
+      =link_to "Update Room Info", edit_room_path(@room), {:remote => true}  
   .well.sidebar-nav
     %ul.nav.nav-list
-      %li.nav-header 在线用户
+      %li.nav-header Users Online
       - @users_online.each do |username|
         %li 
           =link_to username, "#"
-      %li.nav-header 热门回复
-      - @hot_replies.each do |reply|
-        %li 
-          =link_to reply.body, "##{reply.id}"

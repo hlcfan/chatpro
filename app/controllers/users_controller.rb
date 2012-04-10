@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-  	@user = User.find params[:id]
+    @user = User.find params[:id]     
   end
   
   def update
@@ -30,5 +30,12 @@ class UsersController < ApplicationController
       render :action => :edit
     end
   end
+
+  def fav_room
+    room = Room.find params[:id]
+    current_user.fav_rooms << room
+    render :text => "-#{current_user.fav_rooms}-"
+  end
+
 end
 

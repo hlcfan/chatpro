@@ -1,7 +1,7 @@
 .modal{:style => "z-index:10000"}
   .modal-header
     %a.close{"data-dismiss" => "modal"} X
-    New Room
+    Update Room Info
   .modal-body
     = form_for @room do |f|
       = f.label :Name
@@ -11,6 +11,6 @@
       = f.label :Description
       = f.text_area :desc, :size => "100x10"
       .field
-        = f.submit 'Create'
+        = f.submit 'Update'
 :javascript
   $("#edit_form").modal();

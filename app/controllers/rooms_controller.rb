@@ -30,9 +30,30 @@ class RoomsController < ApplicationController
   
   def create
     @room = Room.create(params[:room])
+    @room.user = current_user
+    @room.save
     redirect_to room_path(@room)
   end
-  
+
+  def edit
+    @room  = Room.find params[:id]
+  end    
+    
+  def update
+    @room  = Room.find params[:id]
+    if @room.update_attributes(params[:room])
+      redirect_to(@room)
+    end
+  end
+
+  def destroy
+    @room  = Room.find params[:id]
+    if @room.user.id == current_user.id
+      @room.destroy
+    end
+    redirect_to root_path    
+  end
+
   def leave
     @room = Room.find(params[:room_id])
     @room.user_ids.delete(current_user.id)
