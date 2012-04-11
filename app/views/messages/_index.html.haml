@@ -9,15 +9,15 @@
       %a.signature= msg.user.username      
       - if msg.user.username == "#{current_user.username}"
         .messages.mine{:id => "#{msg.id}" }
-          = raw blacklist markdown(msg.body)
+          = raw markdown(msg.body)
           .holder
             %a{:href => "/vote/#{msg.id}", "data-remote" => "true"} 赞
             %a{:href => "#", :class => "rt", :id => "#{msg.user.username}"} 回
       - else
         .messages{:id => "#{msg.id}" }
-          = raw blacklist markdown(msg.body)
+          = raw markdown(msg.body)
           .holder
-            %a{:href => "#"} 赞  
+            %a{:href => "#"} 赞
             %a{:href => "#", :class => "rt", :id => "#{msg.user.username}"} 回
 #input-area{:style => "background-color:#E0E0E0;position:fixed;bottom:0;left:0;width: 100%;height: 100px;"}
   %table

@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
   
   def create
     @msg = Message.new
-    @msg.body = link_mention_user params[:message][:body]
+    @msg.body = link_mention_user params[:message][:body].gsub(/</, "&LT;")
     @msg.room_id = params[:room_id]
     @msg.user_id = current_user.id
     username = @msg.user.username
@@ -25,7 +25,7 @@ class MessagesController < ApplicationController
       # current_user.notifications.each do |notify|
       #   notifications << notify.user_id
       # end      
-      Juggernaut.publish(@msg.room_id, { :username => username, :msg_id => @msg.id, :msg => blacklist(markdown(@msg.body)), :timestamp => @msg.created_at.strftime("%H:%M"), :online => users_online, :notify_users => @msg.mentioned_user_ids })
+      Juggernaut.publish(@msg.room_id, { :username => username, :msg_id => @msg.id, :msg => markdown(@msg.body), :timestamp => @msg.created_at.strftime("%H:%M"), :online => users_online, :notify_users => @msg.mentioned_user_ids })
     end
     render :text => "ok"   
   end
