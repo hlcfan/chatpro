@@ -3,6 +3,7 @@ source 'http://ruby.taobao.org'
 gem 'rails', '3.2.2'
 gem "rails-i18n","0.1.8"
 gem 'jquery-rails'
+gem "rails_autolink", ">= 1.0.4"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 # Mongoid 辅助插件

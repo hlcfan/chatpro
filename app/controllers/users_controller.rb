@@ -10,7 +10,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find params[:id]     
+    if current_user.id.eql?(params[:id])
+      @user = User.find params[:id]         
+    else
+      @user = current_user
+    end
   end
   
   def update
@@ -34,7 +38,13 @@ class UsersController < ApplicationController
   def fav_room
     room = Room.find params[:id]
     current_user.fav_rooms << room
-    render :text => "-#{current_user.fav_rooms}-"
+    redirect_to :back
+  end
+
+  def unfav_room
+    room = Room.find params[:id]
+    current_user.fav_rooms.delete(room)
+    redirect_to :back
   end
 
 end

@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   require 'will_paginate/array'
   before_filter :authenticate_user!
   def index
-    @rooms = Room.all.to_a
+    @rooms = Room.all.to_a    
     #reset_session
   end
   
@@ -52,11 +52,6 @@ class RoomsController < ApplicationController
       @room.destroy
     end
     redirect_to root_path    
-  end
-
-  def show_fav
-    @favs = current_user.fav_rooms
-    
   end
 
   def leave

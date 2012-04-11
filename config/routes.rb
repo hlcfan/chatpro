@@ -17,6 +17,7 @@ Chatpro::Application.routes.draw do
   match "/verify" => 'rooms#verify'
   match "/vote/:msg_id" => 'messages#vote'
   match "/rooms/:id/fav" => 'users#fav_room'
+  match "/rooms/:id/unfav" => 'users#unfav_room'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

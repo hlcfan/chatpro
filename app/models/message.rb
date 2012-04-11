@@ -5,9 +5,11 @@ class Message
   include Mongoid::Timestamps
   # include Mongoid::SoftDelete
   include Mongoid::BaseModel
+  #include Mongoid::MarkdownBody
 
   #field :sender, :type => String
   field :body, :type => String  
+  field :body_html
   field :mentioned_user_ids, :type => Array, :default => []
 
   belongs_to :room
