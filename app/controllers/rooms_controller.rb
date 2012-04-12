@@ -10,18 +10,13 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     if session["#{params[:id]}_#{current_user.email}"] == 1 || @room.password.nil? || @room.password == ""
       @msgs = @room.messages.order(:_id => :desc).paginate(:page => params[:page], :per_page => 30)
-      @page = @room.messages.length/20 + 1 
-      @room.user_ids.append(current_user.id)
-      @room.save
-      @users_online = []
-      @room.users.each do |user|
-        @users_online << user.username
-      end
+      #@page = @room.messages.length/20 + 1 
+      @room.user_ids << current_user.id
+      @room.save      
       @hot_replies = Message.desc(:vote_user_ids).limit(10).to_a
     else
       render :action => "goto"
-    end
-    #render :text => "<script>window.open('http://localhost:3000/rooms/#{@room.id}?page=#{@page}')</script>" ,:mime_type => Mime::Type.lookup("application/javascript")
+    end    
   end
   
   def new

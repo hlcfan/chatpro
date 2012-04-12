@@ -64,6 +64,13 @@
       </ul>
       <p class="navbar-text">
         <ul class="nav nav-pills pull-right">
+          <% if current_user && current_user.notifications.any? %>
+          <li class="notifications">
+            <a href="/notifications">
+              <span class="count"><%= current_user.notify_count %></span>
+            </a>
+          </li>
+          <% end %>
         <%if current_user%>
           <li class="dropdown" id="menu1">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">

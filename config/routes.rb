@@ -11,13 +11,18 @@ Chatpro::Application.routes.draw do
   resources :rooms  
   resources :users
 
+  resources :notifications, :only => [:index, :destroy] do
+    collection do
+      put :mark_all_as_read
+    end
+  end
   
   match "/leave/:room_id" => 'rooms#leave'
   get "/goto/:id" => 'rooms#goto'
   match "/verify" => 'rooms#verify'
   match "/vote/:msg_id" => 'messages#vote'
   match "/rooms/:id/fav" => 'users#fav_room'
-  match "/rooms/:id/unfav" => 'users#unfav_room'
+  match "/rooms/:id/unfav" => 'users#unfav_room'  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

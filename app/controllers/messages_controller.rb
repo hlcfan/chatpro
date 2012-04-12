@@ -16,17 +16,23 @@ class MessagesController < ApplicationController
     @msg.room.update_attributes(:active_date => Time.now)
     username = @msg.user.username
     user_id = @msg.user.id
+    room = @msg.room
     users_online = []
-    notify_flag = false
-    #notifications = []
+    notify_flag = false        
     @msg.room.users.each do |user|
       users_online << user.username 
     end
     
-    if @msg.save    
-      # current_user.notifications.each do |notify|
-      #   notifications << notify.user_id
-      # end      
+    if @msg.save          
+      @msg.mentioned_user_ids.each do |u_id|
+        if room.user_ids.include?(u_id)
+          User.find(u_id).notifications.where(:message_id => @msg.id, :read => false).first.update_attributes(:read => true)
+        end
+      end        
+      # if @msg.room.user_ids.include?(current_user.id)
+      #   logger.info "########################## Has It"  
+      #   current_user.notifications.where(:message_id => @msg.id, :read => false).first.update_attributes(:read => true)
+      # end
       Juggernaut.publish(@msg.room_id, { :user_id => user_id, :username => username, :msg_id => @msg.id, :msg => markdown(@msg.body), :timestamp => @msg.created_at.strftime("%H:%M"), :online => users_online, :notify_users => @msg.mentioned_user_ids })
     end
     render :text => "ok"   

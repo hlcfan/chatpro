@@ -14,7 +14,8 @@
       =link_to "Update Room Info", edit_room_path(@room), {:remote => true}  
   .well.sidebar-nav
     %ul.nav.nav-list
+      /=debug "#############{@room.users.length}"
       %li.nav-header Users Online
-      - @users_online.each do |username|
+      - @room.users.each do |user|
         %li 
-          =link_to username, "#"
+          =link_to user.username, user_path(user), {:target => "_blank"}

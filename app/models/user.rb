@@ -70,6 +70,10 @@ class User
     end
   end
   
+  def notify_count
+    self.notifications.where(:read => false).length
+  end
+
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
     self.any_of({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i }).first
