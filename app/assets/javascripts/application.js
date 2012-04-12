@@ -16,3 +16,4 @@
 //= require bootstrap-modal
 //= require bootstrap-dropdown
 //= require jquery.atwho
+//= require jquery.textarea

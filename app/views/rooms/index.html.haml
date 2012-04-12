@@ -1,7 +1,75 @@
 %ul.thumbnails
   - @rooms.each do |room|
-    %li.span3
-      %a.thumbnail{:href => room_path(room) }
-        %img{:alt => "", :src => "http://placehold.it/260x180"}
-        %h5 #{room.name}
-        %p #{room.desc} 
+    %li.span3.room{:style => "position:relative"}
+      %h5{:style => "font-size:15px;border-bottom:1px solid #ccc;padding:5px;"}
+        - if room.has_pwd?
+          ☢
+        = link_to "#{room.name[0,30]}", room_path(room), :title => "#{room.name}"
+        %a.like{:href => "/rooms/#{room.id}/fav/"}
+          ❤
+      %p.desc
+        #{room.desc[0,270]} ...
+      %p.stats     
+        %a.left{:title => "Online Users Count"}
+          #{room.users.length}	
+        %a.right{:title => "Messages Count"}
+          #{room.messages.length}	
+
+:css
+  .room
+  {
+    display: block;
+    padding: 4px;
+    height:180px;
+    line-height: 1;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  }
+  a.like
+  {  	
+  	float:right;
+  	margin-right:2px;
+  	font-size:18px;
+  	color:#ccccff;
+  }
+  a.like:hover
+  {
+  	color:#ff0033;
+  	text-decoration:none;
+  }
+  .desc
+  {
+  	padding:5px;
+
+  }
+  p.stats, p.stats a
+  {
+  	position:absolute;  	
+  	color:#ccc;
+  	bottom:-5px;
+  	text-decoration:none;
+  }
+  a.left
+  {  	
+  	position:absolute;
+  	left:10%;
+  	bottom:-10px;;
+  }
+  a.right
+  {
+  	position:absolute;
+  	right:-270px;
+  	bottom:-10px;
+  }
+
+  :javascript
+  $("span.left").hover(function(data){
+  	alert('aa');
+  });
