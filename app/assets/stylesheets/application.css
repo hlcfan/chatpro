@@ -63,9 +63,10 @@
 .fav li
 {
 	width:100px;
-	min-width:200px;
+	min-width:100%;
 	float:left;
 	height:30px;
+	width:auto;
 }
 .fav li a
 {

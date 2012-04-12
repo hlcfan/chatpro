@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   require 'will_paginate/array'
   before_filter :authenticate_user!
   def index
-    @rooms = Room.all.to_a    
+    @rooms = Room.all.order(:active_date, :desc)#.to_a
     #reset_session
   end
   

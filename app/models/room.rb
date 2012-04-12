@@ -5,6 +5,7 @@ class Room
   field :name
   field :desc
   field :password, type: String, :default => ""
+  field :active_date, :type => DateTime
   
   has_many :messages, :dependent => :destroy
   has_and_belongs_to_many :users, :class_name => 'User', :inverse_of => :current_user_rooms

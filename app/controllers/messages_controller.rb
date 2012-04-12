@@ -13,6 +13,7 @@ class MessagesController < ApplicationController
     @msg.body = link_mention_user params[:message][:body].gsub(/</, "&LT;")
     @msg.room_id = params[:room_id]
     @msg.user_id = current_user.id
+    @msg.room.update_attributes(:active_date => Time.now)
     username = @msg.user.username
     user_id = @msg.user.id
     users_online = []
