@@ -3,7 +3,7 @@
     %li.span3.room{:style => "position:relative"}
       %h5{:style => "font-size:15px;border-bottom:1px solid #ccc;padding:5px;"}
         - if room.has_pwd?
-          ☢
+          = image_tag "lock.png", {:style => "display: inline-block;width: 18px;height: 20px;" }
         = link_to "#{room.name[0,30]}", room_path(room), :title => "#{room.name}"
         -if room.user.id != current_user.id
           -if current_user.fav_room_ids.include?(room.id)
