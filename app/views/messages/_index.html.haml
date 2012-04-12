@@ -6,7 +6,7 @@
   /:renderer => "MyLinkRenderer", 
   - msgs.reverse.each do |msg|
     .piece
-      %a.signature= msg.user.username      
+      %a.signature{:href => user_path(msg.user), :target => "_blank"}= msg.user.username      
       - if msg.user.username == "#{current_user.username}"
         .messages.mine{:id => "#{msg.id}" }
           = raw markdown(msg.body)
@@ -59,20 +59,20 @@
     }
     if(data["username"]=="#{current_user.username}")
     {
-      $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages mine' id=" + data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
+      $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "' class='signature' target='_blank' >"+ data["username"] + "</a>" + "<div class='messages mine' id=" + data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
       "<a href='/vote/" + data["msg_id"] + "' data-remote='true'>赞</a>" +
       "<a href='#'' class='rt' id=" + data["username"] + ">回</a></div>" +"</div>" + "</div>");        
     }
     else if(flag == true)
     {                     
-      $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages mentioned' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
+      $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "' class='signature' target='_blank'>"+ data["username"] + "</a>" + "<div class='messages mentioned' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
       "<a href='/vote/" + data["msg_id"]+ "' data-remote='true'>赞</a>" +
       "<a href='#'' class='rt' id=" + data["username"] + ">回</a></div>" +"</div>" + "</div>");     
       document.getElementById("mp3").play();
     }
     else
     {
-      $("#msg").append("<div class='piece'>" + "<a href='#' class='signature'>"+ data["username"] + "</a>" + "<div class='messages' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
+      $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "'class='signature' target='_blank'>"+ data["username"] + "</a>" + "<div class='messages' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
       "<a href='/vote/" + data["msg_id"]+ "' data-remote='true'>赞</a>" +
       "<a href='#'' class='rt' id=" + data["username"] + ">回</a></div>" +"</div>" + "</div>");
     }

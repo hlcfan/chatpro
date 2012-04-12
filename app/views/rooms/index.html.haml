@@ -5,8 +5,13 @@
         - if room.has_pwd?
           ☢
         = link_to "#{room.name[0,30]}", room_path(room), :title => "#{room.name}"
-        %a.like{:href => "/rooms/#{room.id}/fav/"}
-          ❤
+        -if room.user.id != current_user.id
+          -if current_user.fav_room_ids.include?(room.id)
+            %a.like{:href => "/rooms/#{room.id}/unfav/", :style => "color:#ff0033;", :title => "Unfav It"}
+              ❤
+          -else
+            %a.like.unfav{:href => "/rooms/#{room.id}/fav/", :title => "Fav It"}
+              ❤
       %p.desc
         #{room.desc[0,270]} ...
       %p.stats     
@@ -39,7 +44,7 @@
   	font-size:18px;
   	color:#ccccff;
   }
-  a.like:hover
+  a.unfav:hover
   {
   	color:#ff0033;
   	text-decoration:none;

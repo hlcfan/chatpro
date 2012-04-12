@@ -62,6 +62,6 @@
 		%h5{:style => "border-bottom:1px solid #CCC;"}
 			Fav Rooms
 		%ul{:style => "list-style-type:none;margin:5px 10px 5px 0;"}
-			- current_user.fav_rooms.each do |f|		
+			- @user.fav_rooms.each do |f|		
 				%li{:style => "width:100px;float:left;padding:2px 10px;"}
 					= link_to f.name, room_path(f)			
