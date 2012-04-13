@@ -16,4 +16,12 @@ class Notification::Base
   def anchor
     "notification-#{id}"
   end
+
+  def read?
+    if self.read
+      true
+    else
+      false
+    end
+  end
 end

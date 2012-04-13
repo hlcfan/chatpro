@@ -1,4 +1,5 @@
 class NotificationsController < ApplicationController
+  respond_to :html, :js, :only => [:destroy, :mark_all_as_read]
 	def index
     @notifications = current_user.notifications.recent.paginate :page => params[:page], :per_page => 20
     current_user.read_notifications(@notifications)   

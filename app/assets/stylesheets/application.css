@@ -86,3 +86,26 @@
 	color: #999;
 	-moz-border-radius: 2px;
 }
+.timestamp 
+{
+	color: black;	
+	padding: 1px 3px;	
+	background-color: white;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	margin-right: 2px;
+	position: relative;
+	z-index: 1;	
+}
+i.timestamp_icon
+{
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	line-height: 14px;
+	vertical-align: text-top;
+	background-image: url("/assets/icons.png");
+	background-position: -48px -24px;
+	background-repeat: no-repeat;	
+}

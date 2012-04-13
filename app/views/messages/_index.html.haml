@@ -12,13 +12,13 @@
           = raw markdown(msg.body)
           .holder
             %a{:href => "/vote/#{msg.id}", "data-remote" => "true"} 赞
-            %a{:href => "#", :class => "rt", :id => "#{msg.user.username}"} 回
+            %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} 回
       - else
         .messages{:id => "#{msg.id}" }
           = raw markdown(msg.body)
           .holder
             %a{:href => "#"} 赞
-            %a{:href => "#", :class => "rt", :id => "#{msg.user.username}"} 回
+            %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} 回
 #input-area{:style => "background-color:#E0E0E0;position:fixed;bottom:0;left:0;width: 100%;height: 100px;"}
   %table
     %tr
@@ -113,9 +113,12 @@
     //alert('aa');    
   });
   $(document).ready(function(){
-      $("#msg .piece:last-child .messages")[0].parentElement.style.height=$("#msg .piece:last-child .messages").height()+"px";
-      $("#msg .piece:last-child .messages")[0].scrollIntoView();
-      $("#loading").hide();
+      document.getElementById("loading").style.display="none";
+      if($("#msg .piece:last-child .messages")[0]!=undefined)
+      {
+        $("#msg .piece:last-child .messages")[0].parentElement.style.height=$("#msg .piece:last-child .messages").height()+"px";
+        $("#msg .piece:last-child .messages")[0].scrollIntoView();
+      }
   });
 
   $("textarea").tabby();
@@ -131,7 +134,7 @@
   }
   .signature
   {
-    width: 5%;
+    width: 6%;
     float: left;
     margin: 0px 1% 0px 0px;
     text-align: right;
