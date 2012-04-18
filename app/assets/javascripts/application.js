@@ -15,5 +15,6 @@
 //= require_tree .
 //= require bootstrap-modal
 //= require bootstrap-dropdown
+//= require bootstrap-alert
 //= require jquery.atwho
 //= require jquery.textarea

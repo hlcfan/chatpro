@@ -4,6 +4,7 @@ gem 'rails', '3.2.2'
 gem "rails-i18n","0.1.8"
 gem 'jquery-rails'
 gem "rails_autolink", ">= 1.0.4"
+gem 'gravtastic'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 # Mongoid 辅助插件
@@ -41,14 +42,11 @@ gem 'jquery-atwho-rails'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
-
   gem 'uglifier', '>= 1.0.3'
 end
 
-
+gem 'execjs'
+gem 'therubyracer'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

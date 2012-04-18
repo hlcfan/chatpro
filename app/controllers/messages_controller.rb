@@ -28,11 +28,7 @@ class MessagesController < ApplicationController
         if room.user_ids.include?(u_id)
           User.find(u_id).notifications.where(:message_id => @msg.id, :read => false).first.update_attributes(:read => true)
         end
-      end        
-      # if @msg.room.user_ids.include?(current_user.id)
-      #   logger.info "########################## Has It"  
-      #   current_user.notifications.where(:message_id => @msg.id, :read => false).first.update_attributes(:read => true)
-      # end
+      end             
       Juggernaut.publish(@msg.room_id, { :user_id => user_id, :username => username, :msg_id => @msg.id, :msg => markdown(@msg.body), :timestamp => @msg.created_at.strftime("%H:%M"), :online => users_online, :notify_users => @msg.mentioned_user_ids })
     end
     render :text => "ok"   

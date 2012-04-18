@@ -4,6 +4,10 @@ class User
   include Mongoid::Timestamps
   #include Redis::Objects
   extend OmniauthCallbacks
+  
+  include Gravtastic
+  gravtastic
+
   cache
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable

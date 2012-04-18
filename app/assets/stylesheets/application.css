@@ -109,3 +109,11 @@ i.timestamp_icon
 	background-position: -48px -24px;
 	background-repeat: no-repeat;	
 }
+
+.notice
+{
+	position: fixed;
+  top: 35%;
+  left: 35%; 
+  display:none;
+}

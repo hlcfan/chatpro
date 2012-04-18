@@ -1,7 +1,4 @@
 #msg{:style => "padding-bottom:120px;position:relative"}
-  /=debug session.to_a
-  /=debug session["1_#{current_user}"]
-  /=debug current_user.email + params[:room_id]
   = will_paginate(@msgs, :page_links =>false) 
   /:renderer => "MyLinkRenderer", 
   - msgs.reverse.each do |msg|
@@ -37,17 +34,24 @@
   %h2
     Pls Wait For A Second
 
-%audio{:src => "/assets/tip.mp3", :id => "mp3", :preload => "auto"}
+%audio{ :src => "/assets/tip.mp3", :id => "mp3", :preload => "auto" }
 
 
 :javascript  
-  var online_users = new Array();
-  console.log("Online_Users:" + online_users);
+  var online_users = #{@users_online}
+  console.log("Start Online_Users:" + online_users);
   var jug = new Juggernaut();
+
+  jug.on("disconnect", function(){ 
+    $.get({ url:"/leave/#{@room.id}",async:false},function(data){
+      
+    });
+  });
+  
   jug.subscribe("#{@room.id}", function(data){
-    console.log("Got data: " +data["username"] + "|" + data["msg"] + "#{current_user.username}" + "online:" + data["online"]);
+    console.log("Got data: " +data["username"] + "|" + data["msg"] + "#{current_user.username}");
     online_users = data["online"];
-    console.log("Online_Users:" + online_users);
+    console.log("Now Online_Users:" + data["online"]);
     var flag = false;
     console.log(data["msg_id"] + "|" + data["notify_users"]);    
     for( i in data["notify_users"] )
@@ -81,10 +85,13 @@
     if(data["username"].indexOf(String("#{current_user.username}")) >= 0){
       $('#message_body').val('');
     }
+    //$("#online_users").append("")    
   }); 
-
-  console.log("Online_Users:" + online_users);
-  $("textarea").atWho("@",{'debug':true,'data':online_users} );  
+  console.log("Second Online_Users:" + online_users);  
+  $("textarea").atWho("@",function(names){
+    //'data':online_users  
+    names = function(){return window.online_users;}    
+  });  
 
   $("#message_body").keypress(function(e)    
   {    
@@ -108,9 +115,7 @@
     content += " " + "@"+id + " ";
     $("textarea").val(content);    
   })
-  $(window).unload(function(e) {       
-    $.get("/leave/#{@room.id}",{room_id:#{@room.id}} );    
-  });
+
   $(document).ready(function(){
       document.getElementById("loading").style.display="none";
       if($("#msg .piece:last-child .messages")[0]!=undefined)
@@ -121,6 +126,13 @@
   });
 
   $("textarea").tabby();
+
+  window.onbeforeunload = function(){       
+    $.get("/leave/#{@room.id}", function(data){
+      
+    });
+    return "Sure To Leave?";
+  }
 
 :css
   .piece

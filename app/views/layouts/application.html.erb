@@ -8,9 +8,22 @@
   <%= csrf_meta_tags %>
   <script type="text/javascript">
     $('.dropdown-toggle').dropdown();   
+    $(".notice").alert();
+    
+    $(document).ready(function(){
+      if($('.notice').text().length > 8)
+      {
+        $('.notice').show();
+      }
+      $(".notice").fadeOut('slow'); 
+    });
   </script>
 </head>
 <body>
+<div class="notice alert fade in">
+  <a class="close" data-dismiss="alert" href="#">×</a>
+  <%= notice %>
+</div>
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container-fluid">
@@ -93,7 +106,7 @@
   </div>
 </div>
 <div class="container-fluid" style="margin-top:50px;">
-  <div class="row-fluid">    
+  <div class="row-fluid">        
     <%= yield %>
   </div>
 </div>
