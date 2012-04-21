@@ -51,7 +51,7 @@
   jug.subscribe("#{@room.id}", function(data){
     console.log("Got data: " +data["username"] + "|" + data["msg"] + "#{current_user.username}");
     online_users = data["online"];
-    console.log("Now Online_Users:" + data["online"]);
+    console.log("Now Online_Users:" + online_users);
     var flag = false;
     console.log(data["msg_id"] + "|" + data["notify_users"]);    
     for( i in data["notify_users"] )
@@ -84,14 +84,10 @@
     $("#msg .piece:last-child .messages")[0].scrollIntoView();
     if(data["username"].indexOf(String("#{current_user.username}")) >= 0){
       $('#message_body').val('');
-    }
-    //$("#online_users").append("")    
-  }); 
-  console.log("Second Online_Users:" + online_users);  
-  $("textarea").atWho("@",function(names){
-    //'data':online_users  
-    names = function(){return window.online_users;}    
-  });  
+    }    
+  });   
+
+  $("textarea").atWho("@",{'data':window.online_users});  
 
   $("#message_body").keypress(function(e)    
   {    
@@ -127,12 +123,12 @@
 
   $("textarea").tabby();
 
-  window.onbeforeunload = function(){       
-    $.get("/leave/#{@room.id}", function(data){
+  // window.onbeforeunload = function(){       
+  //   $.get("/leave/#{@room.id}", function(data){
       
-    });
-    return "Sure To Leave?";
-  }
+  //   });
+  //   return "Sure To Leave?";
+  // }
 
 :css
   .piece

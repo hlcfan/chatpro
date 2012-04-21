@@ -36,7 +36,7 @@ gem 'juggernaut'
 gem 'devise'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                               :git => 'git://github.com/anjlab/bootstrap-rails.git'
-gem 'jquery-atwho-rails'
+gem 'jquery-atwho-rails', :git => "git://github.com/ichord/jquery-atwho-rails.git"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
