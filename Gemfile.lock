@@ -13,7 +13,7 @@ GIT
     jquery-atwho-rails (0.1.5)
 
 GEM
-  remote: http://ruby.taobao.org/
+  remote: http://rubygems.org/
   specs:
     actionmailer (3.2.2)
       actionpack (= 3.2.2)

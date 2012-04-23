@@ -1,21 +1,21 @@
-<h2>Sign up</h2>
+<div class="container" style="width:500px;">
+  <div class="hero-unit" style="background:white">
+<h2>Sign up/<%= link_to "Sign in",new_user_session_path %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-  
-  <div><%= f.label :username %><br />
-  <%= f.text_field :username %></div>
-  
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <div><%= f.label :UserName%></div>
+  <div><%= f.text_field :username, :class => "input-xlarge", :placeholder => "UserName" %></div>
+  <div><%= f.label :Email%></div>
+  <div><%= f.email_field :email, :class => "input-xlarge", :placeholder => "Email" %></div>
+  <div><%= f.label :Password%></div>
+  <div><%= f.password_field :password, :class => "input-xlarge", :placeholder => "Password" %></div>
+  <div><%= f.label :Password_Confirmation%></div>
+  <div><%= f.password_field :password_confirmation, :class => "input-xlarge", :placeholder => "Password Confirmation" %></div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Sign up" %></div>
+  <div><%= f.submit "Sign up", :class => "btn btn-large btn-success" %></div>
 <% end %>
 
 <%= render "links" %>
+  </div>
+</div>

@@ -117,3 +117,38 @@ i.timestamp_icon
   left: 35%; 
   display:none;
 }
+.container
+{
+	background: white;
+	padding: 30px;
+	margin: 40px auto 20px auto;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	box-shadow: 0px 1px 5px rgba(0,0,0,.2);
+	-moz-box-shadow: 0px 1px 5px rgba(0,0,0,.2);
+	-webkit-box-shadow: 0px 1px 5px rgba(0,0,0,.2);
+}
+.hero-unit
+{
+	padding:6px 5px 8px 5px!important;
+}
+.hero-unit h2
+{
+	border-bottom:1px solid #F0F0F0;
+	font-weight:600;
+	font-size:2em;
+	margin-bottom:10px;
+}
+.hero-unit label
+{
+	font-weight:normal;
+	font-size:18px;
+}
+.hero-unit input[type="text"],.hero-unit input[type="email"],.hero-unit input[type="password"]
+{
+	height:30px !important;
+}
