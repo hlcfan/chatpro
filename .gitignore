@@ -15,3 +15,7 @@
 /tmp
 dump.rdb
 *~
+node_modules/
+nohup.out
+public/assets/
+vendor/bundle/
