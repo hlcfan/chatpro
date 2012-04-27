@@ -11,11 +11,10 @@
       =link_to "❤ Fav It","/rooms/#{@room.id}/fav/" ,{:class => "btn btn-success", :style => "float:right;"}  
   - if @room.user.id == current_user.id
     .well.sidebar-nav
-      =link_to "Update Room Info", edit_room_path(@room), {:remote => true}  
-  .well.sidebar-nav
-    %ul.nav.nav-list#online_users
-      /=debug "#############{@room.users.length}"
-      %li.nav-header Users Online
-      - @room.users.each do |user|
-        %li 
-          =link_to user.username, user_path(user), {:target => "_blank"}
+      =link_to "Update Room Info", edit_room_path(@room), {:remote => true}    
+  / .well.sidebar-nav
+  /   %ul.nav.nav-list#online_users      
+  /     %li.nav-header Users Online
+  /     - @room.users.each do |user|
+  /       %li 
+  /         =link_to user.username, user_path(user), {:target => "_blank"}

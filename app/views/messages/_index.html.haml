@@ -126,7 +126,7 @@
   $("textarea").tabby();
 
   window.onbeforeunload = function(){       
-     $.get("/leave/#{@room.id}", function(data){
+     $.get({ url:"/leave/#{@room.id}",async:false},function(data){
       
      });
      return "Sure To Leave?";
