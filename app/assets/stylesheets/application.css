@@ -152,3 +152,24 @@ i.timestamp_icon
 {
 	height:30px !important;
 }
+
+.box 
+  {
+    background-color: white;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    / -webkit-border-radius: 6px;
+    / -moz-border-radius: 6px;
+    / border-radius: 6px;
+    / -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    / -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    / box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    /*background-color: cornsilk;*/
+    /*border: 1px solid #E0DCBF;*/
+  }          
+
+  .box table td:first-child, .box table td:last-child 
+  {
+    width:6%;
+    font-weight:bold
+  }

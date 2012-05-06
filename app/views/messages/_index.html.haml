@@ -8,14 +8,16 @@
         .messages.mine{:id => "#{msg.id}" }
           = raw markdown(msg.body)
           .holder
-            %a{:href => "/vote/#{msg.id}", "data-remote" => "true"} 赞
-            %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} 回
+            %a{:href => "/vote/#{msg.id}", "data-remote" => "true"} ❤
+            %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} &nbsp;𐎏
+          .timestamp  
+            #{msg.created_at.strftime('%H:%M')}
       - else
         .messages{:id => "#{msg.id}" }
           = raw markdown(msg.body)
           .holder
-            %a{:href => "#"} 赞
-            %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} 回
+            %a{:href => "#"} ❤
+            %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} &nbsp;𐎏
 #input-area{:style => "background-color:#E0E0E0;position:fixed;bottom:0;left:0;width: 100%;height: 100px;"}
   %table
     %tr
@@ -43,7 +45,7 @@
   var jug = new Juggernaut();
 
   jug.on("disconnect", function(){ 
-    $.get({ url:"/leave/#{@room.id}",async:false},function(data){
+    $.get("/leave/#{@room.id}",function(data){
       
     });
   });
@@ -66,21 +68,27 @@
     if(data["username"]=="#{current_user.username}")
     {
       $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "' class='signature' target='_blank' >"+ data["username"] + "</a>" + "<div class='messages mine' id=" + data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
-      "<a href='/vote/" + data["msg_id"] + "' data-remote='true'>赞</a>" +
-      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">回</a></div>" +"</div>" + "</div>");        
+      "<a href='/vote/" + data["msg_id"] + "' data-remote='true'>❤</a>" +
+      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;𐎏</a></div>" +
+      "<div class='timestamp'>" + data["timestamp"]+ "</div>" +
+      "</div>" + "</div>");        
     }
     else if(flag == true)
     {                     
       $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "' class='signature' target='_blank'>"+ data["username"] + "</a>" + "<div class='messages mentioned' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
-      "<a href='/vote/" + data["msg_id"]+ "' data-remote='true'>赞</a>" +
-      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">回</a></div>" +"</div>" + "</div>");     
+      "<a href='/vote/" + data["msg_id"]+ "' data-remote='true'>❤</a>" +
+      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;𐎏</a></div>" +
+      "<div class='timestamp'>" + data["timestamp"]+ "</div>" +
+      "</div>" + "</div>");     
       document.getElementById("mp3").play();
     }
     else
     {
       $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "'class='signature' target='_blank'>"+ data["username"] + "</a>" + "<div class='messages' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
-      "<a href='/vote/" + data["msg_id"]+ "' data-remote='true'>赞</a>" +
-      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">回</a></div>" +"</div>" + "</div>");
+      "<a href='/vote/" + data["msg_id"]+ "' data-remote='true'>❤</a>" +
+      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;𐎏</a></div>" +
+      "<div class='timestamp'>" + data["timestamp"]+ "</div>" +
+      "</div>" + "</div>");
     }
     $("#msg .piece:last-child .messages")[0].parentElement.style.height=$("#msg .piece:last-child .messages").height()+"px";    
     $("#msg .piece:last-child .messages")[0].scrollIntoView();
@@ -101,10 +109,13 @@
 
   $(".messages").live("hover",function(){     
     id = $(this).attr("id");    
-    new_filter = "#"+ id + " .holder"     
-    $(new_filter).show();
+    new_filter_holder = "#"+ id + " .holder";
+    new_filter_timestamp = "#"+ id + " .timestamp";
+    $(new_filter_timestamp).hide();
+    $(new_filter_holder).show();
   }).live("mouseleave",function(){
     $(".holder").hide();
+    $(".timestamp").show();
   });
 
   $(".rt").live("click",function(data){
@@ -112,6 +123,11 @@
     var content = $("textarea").val();
     content += " " + "@"+id + " ";
     $("textarea").val(content);    
+    var val = $("textarea").val();
+    $("textarea").focus();
+    $("textarea").val('');
+    $("textarea").val(val);
+
   })
 
   $(document).ready(function(){
@@ -127,10 +143,9 @@
   $("textarea").tabby();
 
   window.onbeforeunload = function(){       
-     $.get({ url:"/leave/#{@room.id}",async:false},function(data){
-      
+     $.get("/leave/#{@room.id}",function(data){
+     
      });
-     return "Sure To Leave?";
    }
 
 :css
@@ -183,9 +198,18 @@
     right:0;
     top:5px;
     z-index: 1;
-    width:40px;    
+    width:34px;    
     height:25px;
     display:none;
+  }
+  .messages .timestamp
+  {  
+    position:absolute;
+    right:0;
+    top:5px;    
+    z-index: 1;
+    width:auto;    
+    height:16px;  
   }
   .messages .holder a
   {
