@@ -1,0 +1,18 @@
+#notifications.box
+  .tools
+    %h1 Words You Like
+  %table.table
+    %tbody
+      - @msgs.each do |msg|        
+        %tr{:id => msg.id}
+          %td
+            = msg.user.username
+          %td
+            Said:at
+            %i.timestamp_icon
+            %span.timestamp #{msg.created_at.strftime('%H:%M %Y/%m/%d')}
+            %p
+              = raw markdown(msg.body)
+          %td
+            = link_to "Delete", word_path(msg), :method => :delete, :remote => true, :class => "btn btn-danger"                    
+      = will_paginate @msgs
