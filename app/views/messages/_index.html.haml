@@ -16,7 +16,7 @@
         .messages{:id => "#{msg.id}" }
           = raw markdown(msg.body)
           .holder
-            %a{:href => "#"} ❤
+            %a{:href => "/vote/#{msg.id}", "data-remote" => "true"} ❤
             %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} &nbsp;𐎏
           .timestamp  
             #{msg.created_at.strftime('%H:%M')}
