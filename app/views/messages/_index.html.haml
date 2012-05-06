@@ -18,6 +18,8 @@
           .holder
             %a{:href => "#"} ❤
             %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} &nbsp;𐎏
+          .timestamp  
+            #{msg.created_at.strftime('%H:%M')}
 #input-area{:style => "background-color:#E0E0E0;position:fixed;bottom:0;left:0;width: 100%;height: 100px;"}
   %table
     %tr
