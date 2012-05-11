@@ -4,11 +4,31 @@
     Share This Message
   .modal-body
     #msg-body{:style => "font-weight:bold"}
-      #{raw markdown @msg.body}
-    %ul
-      %li Share To Weibo
-      %li Share To Twitter
-      %li Share To Douban
+      #{raw markdown @msg.body}    
+    #jiathis_style_32x32
+      %a.jiathis_button_tsina#tsina                
+      %a.jiathis_button_douban   
+      %a.jiathis_button_evernote
+      %a.jiathis_button_googleplus
+      %a.jiathis_button_twitter
+      %a.jiathis.jiathis_txt.jtico.jtico_jiathis{:href => "http://www.jiathis.com/share?uid=1615968", :target => "_blank"}
+      %a.jiathis_counter_style
+    %script{:charset => "utf-8", :src => "http://v2.jiathis.com/code/jia.js?uid=1615968", :type => "text/javascript"}
 
 :javascript
   $("#edit_form").modal();
+  $('#edit_form').bind('hidden', function () {
+    jiathis_config = { 
+      url: "http://hlcfan.tk/rooms/#{@msg.room.id}", 
+      title: "#{@msg.room.name} | ", 
+      summary:"#{@msg.room.desc.split.join(" ")} - ChatPro" 
+    }
+  });
+  
+  var jiathis_config = {
+    url:location.href,
+    title:"#{@msg.room.name} | ",
+    summary:"#{@msg.user.username}:" + document.getElementById("msg-body").innerText
+  }  
+  
+  

@@ -7,6 +7,8 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find params[:id]
+    @title = @user.username
+    @meta_desc = "Info About #{@user.username}"
   end
 
   def edit

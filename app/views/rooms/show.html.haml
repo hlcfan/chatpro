@@ -17,11 +17,11 @@
       %li.nav-header Operation
       %li
         #ckepop
-          %a.jiathis_button_tsina
-          %a.jiathis_button_qzone          
-          %a.jiathis_button_tqq
-          %a.jiathis_button_renren
-          /%a.jiathis_button_kaixin001
+          %a.jiathis_button_tsina                
+          %a.jiathis_button_evernote
+          %a.jiathis_button_douban   
+          %a.jiathis_button_googleplus
+          %a.jiathis_button_twitter
           %a.jiathis.jiathis_txt.jtico.jtico_jiathis{:href => "http://www.jiathis.com/share?uid=1615968", :target => "_blank"}
           %a.jiathis_counter_style
       %br
@@ -29,8 +29,17 @@
       %li
         %input{:type => "text", :value => "Copy Room ID:#{@room.id}", :id => "roomid"}
         /%input{:type => "button", :class => "btn", :value => "Copy Room Id", :id => "copyid"} 
-      %script{:charset => "utf-8", :src => "http://v2.jiathis.com/code/jia.js?uid=1615968", :type => "text/javascript"}      
+      %script{:charset => "utf-8", :src => "http://v2.jiathis.com/code/jia.js?uid=1615968", :type => "text/javascript"}
 
+  .well.sidebar-nav
+    %ul.nav.nav-list#online_users      
+      %li.nav-header Room Info
+      %ul{:style => "list-style-type:none;margin-left:0;"}
+        %li
+          %b
+            =@room.name
+        %li{:style => "overflow-y:scroll;"}
+          =@room.desc
 
 / .well.sidebar-nav
 /   %ul.nav.nav-list#online_users      
@@ -46,3 +55,9 @@
   }).mouseleave(function(){
     $("#roomid").val("Copy Room ID:#{@room.id}");
   })
+
+  var jiathis_config = { 
+    url: "http://hlcfan.tk/rooms/#{@room.id}", 
+    title: "#{@room.name} | ", 
+    summary:"#{@room.desc.split.join(" ")} - ChatPro" 
+  }  
