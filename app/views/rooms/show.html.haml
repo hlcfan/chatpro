@@ -11,10 +11,38 @@
       =link_to "❤ Fav It","/rooms/#{@room.id}/fav/" ,{:class => "btn btn-success", :style => "float:right;"}  
   - if @room.user.id == current_user.id
     .well.sidebar-nav
-      =link_to "Update Room Info", edit_room_path(@room), {:remote => true}    
-  / .well.sidebar-nav
-  /   %ul.nav.nav-list#online_users      
-  /     %li.nav-header Users Online
-  /     - @room.users.each do |user|
-  /       %li 
-  /         =link_to user.username, user_path(user), {:target => "_blank"}
+      =link_to "Update Room Info", edit_room_path(@room), {:remote => true} 
+  .well.sidebar-nav
+    %ul.nav.nav-list#online_users      
+      %li.nav-header Operation
+      %li
+        #ckepop
+          %a.jiathis_button_tsina
+          %a.jiathis_button_qzone          
+          %a.jiathis_button_tqq
+          %a.jiathis_button_renren
+          /%a.jiathis_button_kaixin001
+          %a.jiathis.jiathis_txt.jtico.jtico_jiathis{:href => "http://www.jiathis.com/share?uid=1615968", :target => "_blank"}
+          %a.jiathis_counter_style
+      %br
+      %br
+      %li
+        %input{:type => "text", :value => "Copy Room ID:#{@room.id}", :id => "roomid"}
+        /%input{:type => "button", :class => "btn", :value => "Copy Room Id", :id => "copyid"} 
+      %script{:charset => "utf-8", :src => "http://v2.jiathis.com/code/jia.js?uid=1615968", :type => "text/javascript"}      
+
+
+/ .well.sidebar-nav
+/   %ul.nav.nav-list#online_users      
+/     %li.nav-header Users Online
+/     - @room.users.each do |user|
+/       %li 
+/         =link_to user.username, user_path(user), {:target => "_blank"}
+
+:javascript
+  $("#roomid").hover(function(){
+    $("#roomid").val("#{@room.id}");
+    $("#roomid").select();
+  }).mouseleave(function(){
+    $("#roomid").val("Copy Room ID:#{@room.id}");
+  })

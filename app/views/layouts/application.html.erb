@@ -84,6 +84,12 @@
           
         </li>
       </ul>
+
+      <form class="navbar-search pull-left" action="/goto" method="post" id="goto">
+        <input type="text" class="search-query span2" placeholder="Room To Go" name="id">
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+      </form>
+
       <p class="navbar-text">
         <ul class="nav nav-pills pull-right">
           <% if current_user && current_user.notifications.any? %>

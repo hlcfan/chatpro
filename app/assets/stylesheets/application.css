@@ -95,8 +95,7 @@
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	margin-right: 2px;
-	position: relative;
-	z-index: 1;	
+	position: relative;	
 }
 i.timestamp_icon
 {

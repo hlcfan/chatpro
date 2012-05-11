@@ -1,0 +1,14 @@
+.modal{:style => "z-index:10000"}
+  .modal-header
+    %a.close{"data-dismiss" => "modal"} X
+    Share This Message
+  .modal-body
+    #msg-body{:style => "font-weight:bold"}
+      #{raw markdown @msg.body}
+    %ul
+      %li Share To Weibo
+      %li Share To Twitter
+      %li Share To Douban
+
+:javascript
+  $("#edit_form").modal();

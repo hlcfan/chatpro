@@ -38,17 +38,17 @@ class MessagesController < ApplicationController
     end
   end
 
-  def vote
-    msg = Message.find(params[:msg_id])
-    unless msg.vote_user_ids.include?(current_user.id)
-      msg.vote_users << current_user
-      current_user.vote_message_ids << msg.id
-      current_user.save
-      msg.save
-      render :js => "alert('thx,man')"
-    else
-      render :js => "alert('you have voted,man')"
-    end    
+  def share
+    @msg = Message.find(params[:msg_id])
+    # unless msg.vote_user_ids.include?(current_user.id)
+    #   msg.vote_users << current_user
+    #   current_user.vote_message_ids << msg.id
+    #   current_user.save
+    #   msg.save
+    #   render :js => "alert('thx,man')"
+    # else
+    #   render :js => "alert('you have voted,man')"
+    # end    
   end
 
   private

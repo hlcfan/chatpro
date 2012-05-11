@@ -13,7 +13,7 @@
             %a.like.unfav{:href => "/rooms/#{room.id}/fav/", :title => "Fav It"}
               ❤
       %p.desc
-        #{room.desc[0,270]} ...
+        #{room.desc[0,270]} [...]
       %p.stats     
         %a.left{:title => "Online Users Count"}
           #{room.users.length}	

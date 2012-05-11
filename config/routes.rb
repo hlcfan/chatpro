@@ -22,9 +22,10 @@ Chatpro::Application.routes.draw do
   match "/leave/:room_id" => 'rooms#leave'
   get "/goto/:id" => 'rooms#goto'
   match "/verify" => 'rooms#verify'
-  match "/vote/:msg_id" => 'messages#vote'
+  match "/share/:msg_id" => 'messages#share'
   match "/rooms/:id/fav" => 'users#fav_room'
   match "/rooms/:id/unfav" => 'users#unfav_room'
+  post "/goto" => 'rooms#goto'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
