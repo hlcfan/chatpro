@@ -4,7 +4,7 @@
     Share This Message
   .modal-body
     #msg-body{:style => "font-weight:bold"}
-      #{raw markdown @msg.body}    
+      #{raw(@msg.body_html)}    
     #jiathis_style_32x32
       %a.jiathis_button_tsina#tsina                
       %a.jiathis_button_douban   

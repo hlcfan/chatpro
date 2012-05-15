@@ -1,5 +1,4 @@
 # coding: utf-8
-# coding: utf-8
 require 'rails_autolink'
 require 'iconv'
 module Redcarpet
