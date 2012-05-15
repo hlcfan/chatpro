@@ -14,7 +14,7 @@
               %i.timestamp_icon
               %span.timestamp #{notification.created_at}
               %p
-                = raw markdown(notification.message.body)
+                = raw(notification.message.body_html)
             %td
               = link_to "Delete", notification_path(notification), :method => :delete, :remote => true, :class => "btn btn-danger"
               
@@ -27,7 +27,7 @@
               %i.timestamp_icon
               %span.timestamp #{notification.created_at}
               %p
-                = raw markdown(notification.message.body)
+                = raw(notification.message.body_html)
             %td
               Delete
       = will_paginate @notifications

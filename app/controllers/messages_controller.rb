@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
   def create
     @msg = Message.new
     if params[:message][:body].length <= 600
-      @msg.body = link_mention_user params[:message][:body].gsub(/</, "&LT;")
+      @msg.body = link_mention_user params[:message][:body]
       @msg.room_id = params[:room_id]
       @msg.user_id = current_user.id
       @msg.room.update_attributes(:active_date => Time.now)
@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
             User.find(u_id).notifications.where(:message_id => @msg.id, :read => false).first.update_attributes(:read => true)
           end
         end             
-        Juggernaut.publish(@msg.room_id, { :user_id => user_id, :username => username, :msg_id => @msg.id, :msg => markdown(@msg.body), :timestamp => @msg.created_at.strftime("%H:%M"), :online => users_online, :notify_users => @msg.mentioned_user_ids })
+        Juggernaut.publish(@msg.room_id, { :user_id => user_id, :username => username, :msg_id => @msg.id, :msg => @msg.body_html.html_safe, :timestamp => @msg.created_at.strftime("%H:%M"), :online => users_online, :notify_users => @msg.mentioned_user_ids })
       end
       render :text => "ok"
     else
@@ -55,7 +55,7 @@ class MessagesController < ApplicationController
   def markdown(text)    
     assembler = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
     :autolink => true, :filter_html => true, :hard_wrap => true)
-      assembler.render(text)  
+      assembler.render(text.gsub("\n","\n\n"))  
   end
 
   DISALLOWED_TAGS = %w(script iframe input form) unless defined?(DISALLOWED_TAGS)

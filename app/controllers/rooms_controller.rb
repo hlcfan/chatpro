@@ -11,6 +11,7 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     @title = @room.name
     @meta_desc = @room.desc[0,100]
+    @room_url = room_url
     if session["#{params[:id]}_#{current_user.email}"] == 1 || @room.password.nil? || @room.password == ""
       @msgs = @room.messages.order(:_id => :desc).paginate(:page => params[:page], :per_page => 30)
       #@page = @room.messages.length/20 + 1 

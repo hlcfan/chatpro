@@ -27,7 +27,7 @@
       %br
       %br
       %li
-        %input{:type => "text", :value => "Copy Room ID:#{@room.id}", :id => "roomid"}
+        %input{:type => "text", :value => "URL:#{@room_url}", :id => "roomid"}
         /%input{:type => "button", :class => "btn", :value => "Copy Room Id", :id => "copyid"} 
       %script{:charset => "utf-8", :src => "http://v2.jiathis.com/code/jia.js?uid=1615968", :type => "text/javascript"}
 
@@ -50,10 +50,10 @@
 
 :javascript
   $("#roomid").hover(function(){
-    $("#roomid").val("#{@room.id}");
+    $("#roomid").val("#{@room_url}");
     $("#roomid").select();
   }).mouseleave(function(){
-    $("#roomid").val("Copy Room ID:#{@room.id}");
+    $("#roomid").val("URL:#{@room_url}");
   })
 
   var jiathis_config = { 

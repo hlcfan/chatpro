@@ -6,7 +6,7 @@
       %a.signature{:href => user_path(msg.user), :target => "_blank"}= msg.user.username      
       - if msg.user.username == "#{current_user.username}"
         .messages.mine{:id => "#{msg.id}" }
-          = raw markdown(msg.body)
+          = raw(msg.body_html)
           .holder
             %a{:href => "/share/#{msg.id}", "data-remote" => "true", :class => "share"} ❤
             %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} Re
@@ -14,7 +14,7 @@
             #{msg.created_at.strftime('%H:%M')}
       - else
         .messages{:id => "#{msg.id}" }
-          = raw markdown(msg.body)
+          = raw(msg.body_html)
           .holder
             %a{:href => "/share/#{msg.id}", "data-remote" => "true", :class => "share"} ❤
             %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} Re

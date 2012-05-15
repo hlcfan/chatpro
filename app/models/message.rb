@@ -5,7 +5,7 @@ class Message
   include Mongoid::Timestamps
   # include Mongoid::SoftDelete
   include Mongoid::BaseModel
-  #include Mongoid::MarkdownBody
+  include Mongoid::MarkdownBody
 
   #field :sender, :type => String
   field :body, :type => String  
