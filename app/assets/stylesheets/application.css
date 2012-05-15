@@ -170,3 +170,7 @@ i.timestamp_icon
   width:6%;
   font-weight:bold
 }
+.messages .highlight
+{
+	width:95%;
+}
