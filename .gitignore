@@ -19,3 +19,5 @@ node_modules/
 nohup.out
 public/assets/
 vendor/bundle/
+public/profile/
+public/warcraft/
