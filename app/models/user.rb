@@ -78,6 +78,10 @@ class User
     self.notifications.where(:read => false).length
   end
 
+  def msgs_count
+    Message.where(:user_id => self.id).length
+  end
+
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
     self.any_of({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i }).first
@@ -91,6 +95,7 @@ class User
       User.create!(:email => data["email"], :password => Devise.friendly_token[0,20])
     end
   end
+
     
   ## Encryptable
   # field :password_salt, :type => String

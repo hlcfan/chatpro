@@ -51,6 +51,12 @@ class MessagesController < ApplicationController
     # end    
   end
 
+  def destroy
+    msg = Message.find params[:id]
+    msg.destroy
+    redirect_to :back
+  end
+  
   private
   def markdown(text)    
     assembler = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
@@ -94,4 +100,5 @@ class MessagesController < ApplicationController
       text
     end
   end
+
 end

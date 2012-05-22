@@ -1,0 +1,28 @@
+.span3
+	=render :partial => "left_bar"
+.span9
+	.hero-unit
+		%table.table.table-striped
+			%tr
+				%thead
+					%td
+						ID
+					%td
+						Username
+					%td 
+						Email
+					%td
+						Words Count
+			- @users.each do|user|
+				%tr				
+					%td
+						=user.id
+					%td
+						=user.username
+					%td
+						=user.email
+					%td
+						=user.msgs_count
+				= will_paginate(@users) 
+
+

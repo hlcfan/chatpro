@@ -1,0 +1,27 @@
+.modal{:style => "z-index:10000"}
+  .modal-header
+    %a.close{"data-dismiss" => "modal"} X
+    Message
+  .modal-body
+    %table.table.table-striped
+      %tr
+        %thead
+          %td
+            ID
+          %td
+            Username
+          %td 
+            Body
+          %td
+            Operation
+      %tr       
+        %td
+          =@msg.id
+        %td
+          =@msg.user.username
+        %td
+          =@msg.body
+        %td
+          =link_to '删除', message_path(@msg), :confirm => 'Are you sure?', :method => :delete
+:javascript
+  $("#edit_form").modal();

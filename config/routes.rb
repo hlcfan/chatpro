@@ -10,6 +10,12 @@ Chatpro::Application.routes.draw do
   
   resources :rooms  
   resources :users
+  resources :tools do #, :only => [:index]
+    collection do
+      get :user_list
+      get :message_mgmt
+    end
+  end
 
   resources :notifications, :only => [:index, :destroy] do
     collection do
@@ -26,6 +32,7 @@ Chatpro::Application.routes.draw do
   match "/rooms/:id/fav" => 'users#fav_room'
   match "/rooms/:id/unfav" => 'users#unfav_room'
   post "/goto" => 'rooms#goto'
+  match "/tools/msg" => 'tools#show_msg'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

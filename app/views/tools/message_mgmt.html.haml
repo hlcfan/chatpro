@@ -1,0 +1,31 @@
+.span3
+	=render :partial => "left_bar"
+.span9
+	.hero-unit
+		%form{:action => "/tools/msg/", :method => "post", "data-remote" => "true"}
+			%input{:name => "msg_id", :placeholder => "Message Id", :type => "text"}
+			%input{:name => "authenticity_token", :type => "hidden", :value => "#{form_authenticity_token}"}
+
+		%table.table.table-striped
+			%tr
+				%thead
+					%td
+						ID
+					%td
+						Username
+					%td 
+						Body
+					%td
+						Operation
+			- @msgs.each do|msg|				
+				%tr				
+					%td
+						=msg.id
+					%td
+						=msg.user.username
+					%td
+						=msg.body
+					%td
+						=link_to '删除', message_path(msg), :confirm => 'Are you sure?', :method => :delete
+			= will_paginate(@msgs) 
+

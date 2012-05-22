@@ -13,7 +13,7 @@ class RoomsController < ApplicationController
     @meta_desc = @room.desc[0,100]
     @room_url = room_url
     if session["#{params[:id]}_#{current_user.email}"] == 1 || @room.password.nil? || @room.password == ""
-      @msgs = @room.messages.order(:_id => :desc).paginate(:page => params[:page], :per_page => 30)
+      @msgs = @room.messages.order(:_id => :desc).paginate(:page => params[:page], :per_page => 60)
       #@page = @room.messages.length/20 + 1 
       @room.user_ids << current_user.id
       @room.save     
