@@ -21,7 +21,7 @@ class RoomsController < ApplicationController
       @room.users.each do |user|
         @users_online << user.username
       end 
-      @hot_replies = Message.desc(:vote_user_ids).limit(10).to_a
+      @hot_replies = Message.desc(:vote_user_ids).limit(10).to_a      
     else
       render :action => "goto"
     end    

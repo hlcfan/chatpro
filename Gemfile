@@ -21,7 +21,7 @@ gem 'bootstrap-will_paginate'
 
 # 三方平台 OAuth 验证登陆
 gem "omniauth", "~> 1.0.1"
-#gem 'omniauth-openid', "~> 1.0.1"
+gem 'omniauth-openid', "~> 1.0.1"
 #gem "omniauth-github", "~> 1.0.0"
 #gem "omniauth-twitter", "~> 0.0.7"
 #gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
@@ -45,8 +45,13 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+#HTML To Pdf
+gem 'wicked_pdf'
+
 gem 'execjs'
 gem 'therubyracer'
+
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

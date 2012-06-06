@@ -63,6 +63,8 @@ class User
 
   has_many :notifications, :class_name => 'Notification::Base', :dependent => :delete
 
+  embeds_many :authorizations
+
   def read_notifications(notifications)
     unread_ids = notifications.find_all{|notification| !notification.read?}.map(&:_id)
     if unread_ids.any?
@@ -94,6 +96,16 @@ class User
     else
       User.create!(:email => data["email"], :password => Devise.friendly_token[0,20])
     end
+  end
+
+  def bind?(provider)
+    self.authorizations.collect { |a| a.provider }.include?(provider)
+  end
+
+  def bind_service(response)
+    provider = response["provider"]
+    uid = response["uid"]
+    authorizations.create(:provider => provider , :uid => uid )
   end
 
     
