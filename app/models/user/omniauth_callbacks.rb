@@ -30,7 +30,7 @@ class User
         user.email = data["email"]
         user.email = "twitter+#{uid}@example.com" if provider == "twitter"
         user.email = "douban+#{uid}@example.com" if provider == "douban"
-        user.name = data['name']
+        user.username = data['name']
 
         user.login = data["nickname"]
         user.login = data["name"] if provider == "google"
@@ -44,7 +44,7 @@ class User
 
         user.password = Devise.friendly_token[0, 20]
         user.location = data["location"]
-        user.tagline = data["description"]
+        #user.tagline = data["description"]
       end
     end
   end

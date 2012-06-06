@@ -218,7 +218,7 @@ Devise.setup do |config|
   #config.omniauth :github, Setting.github_token, Setting.github_secret
   config.omniauth :open_id,
                   :store => OpenID::Store::Filesystem.new('/tmp'),
-                  :name => 'google_openid',
+                  :name => 'google',
                   :identifier => 'https://www.google.com/accounts/o8/id',
                   :require => 'omniauth-openid'
 

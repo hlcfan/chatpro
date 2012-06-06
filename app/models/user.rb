@@ -98,6 +98,10 @@ class User
     end
   end
 
+  def self.find_by_email(email)
+    where(:email => email).first
+  end
+  
   def bind?(provider)
     self.authorizations.collect { |a| a.provider }.include?(provider)
   end
