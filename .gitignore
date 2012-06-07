@@ -21,3 +21,4 @@ public/assets/
 vendor/bundle/
 public/profile/
 public/warcraft/
+config/config.yml

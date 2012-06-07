@@ -1,6 +1,6 @@
-class ToolsController < ApplicationController
-	USER_NAME, PASSWORD = 'hlcfan', '123456'
-  before_filter :authenticate#, :except => [:index, :show]
+require 'yaml'
+class ToolsController < ApplicationController	
+  before_filter :authenticate #, :except => [:index, :show]
 	def index
 		
 	end
@@ -20,8 +20,10 @@ class ToolsController < ApplicationController
 
 	private
   def authenticate
+  	config = YAML::load(File.open("#{Rails.root}/config/config.yml"))
     authenticate_or_request_with_http_basic do |user_name, password|
-      user_name == USER_NAME && password == PASSWORD
+      user_name == config["defaults"]["username"] && password == config["defaults"]["password"]
     end
   end
+ 
 end
