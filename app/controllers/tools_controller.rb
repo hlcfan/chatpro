@@ -1,5 +1,5 @@
 class ToolsController < ApplicationController
-	USER_NAME, PASSWORD = 'hlcfan', '123456'
+	USER_NAME, PASSWORD = 'hlcfan', 'aid295'
   before_filter :authenticate#, :except => [:index, :show]
 	def index
 		
