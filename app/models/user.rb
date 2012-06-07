@@ -30,7 +30,7 @@ class User
   field :weibo_id, :type => String , :default => ""
   field :intro, :type => String , :default => ""
   field :custom_ids, :type => Array, :default => []
-
+  
   field :encrypted_password, :type => String, :null => false, :default => ""
 
   ## Recoverable
@@ -101,7 +101,7 @@ class User
   def self.find_by_email(email)
     where(:email => email).first
   end
-  
+
   def bind?(provider)
     self.authorizations.collect { |a| a.provider }.include?(provider)
   end
@@ -111,7 +111,6 @@ class User
     uid = response["uid"]
     authorizations.create(:provider => provider , :uid => uid )
   end
-
     
   ## Encryptable
   # field :password_salt, :type => String

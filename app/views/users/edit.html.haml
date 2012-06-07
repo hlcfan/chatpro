@@ -1,68 +1,69 @@
-%h1
-	= link_to @user.username, user_path(@user)
-	> Edit	
-.avatar
-	=image_tag("http://www.gravatar.com/avatar/941056da1db23b2c0081e9c8d9416574?s=128&amp;d=identicon&amp;r=PG", :width => "128", :height => "128")	
-= form_for(@user) do |f|	
-	.left
-		%table
-			%tr
-				%td
-					Website:
-				%td
-					= f.text_field :website
-			%tr
-				%td
-					Email:
-				%td
-					= f.text_field :email
-			%tr
-				%td
-					Facebook:
-				%td
-					= f.text_field :facebook_id
-			%tr
-				%td
-					Twitter:
-				%td
-					= f.text_field :twitter_id
-			%tr
-				%td
-					Github:
-				%td
-					= f.text_field :github_id
-			%tr
-				%td
-					G +:
-				%td
-					= f.text_field :googleplus_id				
-			%tr
-				%td
-					StackOverFlow:
-				%td
-					= f.text_field :stackoverflow_id
-			%tr
-				%td
-					Weibo:
-				%td
-					= f.text_field :weibo_id
-	.right
-		.about-me 
-			= f.text_area :intro
-	.form-actions{:style => "float:left;padding: 17px 0 18px 20px;width:98.5%;"}
-		= f.submit "Save Profile", :class => "btn btn-large"
+.user_setting
+	%h1{:style => "border-bottom:1px solid #ccc;"}
+		= link_to @user.username, user_path(@user)
+		> Edit	
+	.avatar
+		=image_tag(@user.gravatar_url, :width => "120", :height => "120")
+	= form_for(@user) do |f|	
+		.left
+			%table
+				%tr
+					%td
+						Website:
+					%td
+						= f.text_field :website
+				%tr
+					%td
+						Email:
+					%td
+						= f.text_field :email
+				%tr
+					%td
+						Facebook:
+					%td
+						= f.text_field :facebook_id
+				%tr
+					%td
+						Twitter:
+					%td
+						= f.text_field :twitter_id
+				%tr
+					%td
+						Github:
+					%td
+						= f.text_field :github_id
+				%tr
+					%td
+						G +:
+					%td
+						= f.text_field :googleplus_id				
+				%tr
+					%td
+						StackOverFlow:
+					%td
+						= f.text_field :stackoverflow_id
+				%tr
+					%td
+						Weibo:
+					%td
+						= f.text_field :weibo_id
+		.right
+			.about-me 
+				= f.text_area :intro
+		.form-actions{:style => "float:left;padding: 17px 0 18px 20px;width:98.5%;"}
+			= f.submit "Save Profile", :class => "btn btn-large"
 
 :css
 	.avatar
 	{		
 		margin-right:3%;
 	}
-	.left table td
-	{
-		padding:5px 30px 0 0;			
-	}
 	textarea
 	{
 		width:98%;
 		height:100%;
+	}
+	.user_setting .left table td {
+		padding: 0 20px 0 0;
+		padding-top: 5px;
 	}
