@@ -28,15 +28,15 @@ class User
     def new_from_provider_data(provider, uid, data)
       User.new do |user|
         user.email = data["email"]
-        user.email = "twitter+#{uid}@example.com" if provider == "twitter"
-        user.email = "douban+#{uid}@example.com" if provider == "douban"
+        #user.email = "twitter+#{uid}@example.com" if provider == "twitter"
+        #user.email = "douban+#{uid}@example.com" if provider == "douban"
         user.username = data['name']
 
         user.login = data["nickname"]
         user.login = data["name"] if provider == "google"
         user.login.gsub!(/[^\w]/, "_")
 
-        user.github = data['nickname'] if provider == "github"
+        #user.github = data['nickname'] if provider == "github"
 
         if User.where(:login => user.login).count > 0 || user.login.blank?
           user.login = "u#{Time.now.to_i}" # TODO: possibly duplicated user login here. What should we do?
@@ -44,7 +44,7 @@ class User
 
         user.password = Devise.friendly_token[0, 20]
         user.location = data["location"]
-        #user.tagline = data["description"]
+        user.intro = data["description"]
       end
     end
   end
