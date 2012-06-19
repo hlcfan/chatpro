@@ -3,23 +3,23 @@
   /:renderer => "MyLinkRenderer", 
   - msgs.reverse.each do |msg|
     .piece
-      %a.signature{:href => user_path(msg.user), :target => "_blank"}= msg.user.username      
+      %a.signature{:href => user_path(msg.user), :target => "_blank"} 
+        =image_tag(msg.user.gravatar_url, :width => "50", :height => "50")
+      .info_bar
+        %b=msg.user.username
+        =msg.created_at.strftime("%H:%M:%S %Y-%m-%d")
       - if msg.user.username == "#{current_user.username}"
         .messages.mine{:id => "#{msg.id}" }
           = raw(msg.body_html)
           .holder
             %a{:href => "/share/#{msg.id}", "data-remote" => "true", :class => "share"} ❤
-            %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} Re
-          .timestamp  
-            #{msg.created_at.strftime('%H:%M')}
+            %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} Re          
       - else
         .messages{:id => "#{msg.id}" }
           = raw(msg.body_html)
           .holder
             %a{:href => "/share/#{msg.id}", "data-remote" => "true", :class => "share"} ❤
-            %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} Re
-          .timestamp  
-            #{msg.created_at.strftime('%H:%M')}
+            %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} Re          
 #input-area{:style => "background-color:#E0E0E0;position:fixed;bottom:0;left:0;width: 100%;height: 100px;"}
   %table
     %tr
@@ -69,30 +69,27 @@
     }
     if(data["username"]=="#{current_user.username}")
     {
-      $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "' class='signature' target='_blank' >"+ data["username"] + "</a>" + "<div class='messages mine' id=" + data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
+      $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "' class='signature' target='_blank' >"+ data["user_avatar"] + "</a>" + "<div class='info_bar'>" + "<b>" + data["username"] + "</b>&nbsp;" + data["timestamp"] + "</div>" + "<div class='messages mine' id=" + data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
       "<a href='/share/" + data["msg_id"] + "' data-remote='true' class='share'>❤</a>" +
-      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;Re</a></div>" +
-      "<div class='timestamp'>" + data["timestamp"]+ "</div>" +
+      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;Re</a></div>" +      
       "</div>" + "</div>");        
     }
     else if(flag == true)
     {                     
-      $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "' class='signature' target='_blank'>"+ data["username"] + "</a>" + "<div class='messages mentioned' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
+      $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "' class='signature' target='_blank'>"+ data["user_avatar"] + "</a>" + "<div class='info_bar'>" + "<b>" + data["username"] + "</b>&nbsp;" + data["timestamp"] + "</div>" + "<div class='messages mentioned' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
       "<a href='/share/" + data["msg_id"]+ "' data-remote='true' class='share'>❤</a>" +
-      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;Re</a></div>" +
-      "<div class='timestamp'>" + data["timestamp"]+ "</div>" +
+      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;Re</a></div>" +      
       "</div>" + "</div>");     
       document.getElementById("mp3").play();
     }
     else
     {
-      $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "'class='signature' target='_blank'>"+ data["username"] + "</a>" + "<div class='messages' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
+      $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "'class='signature' target='_blank'>"+ data["user_avatar"] + "</a>" + "<div class='info_bar'>" + "<b>" + data["username"] + "</b>&nbsp;" + data["timestamp"] + "</div>" + "<div class='messages' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
       "<a href='/share/" + data["msg_id"]+ "' data-remote='true' class='share'>❤</a>" +
-      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;Re</a></div>" +
-      "<div class='timestamp'>" + data["timestamp"]+ "</div>" +
+      "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;Re</a></div>" +      
       "</div>" + "</div>");
     }
-    $("#msg .piece:last-child .messages")[0].parentElement.style.height=$("#msg .piece:last-child .messages").height()+"px";    
+    $("#msg .piece:last-child .messages")[0].parentElement.style.height=$("#msg .piece:last-child .messages").height()+20+"px";    
     $("#msg .piece:last-child .messages")[0].scrollIntoView();
     if(data["username"].indexOf(String("#{current_user.username}")) >= 0){
       $('#message_body').val('');
@@ -111,13 +108,10 @@
 
   $(".messages").live("hover",function(){     
     id = $(this).attr("id");    
-    new_filter_holder = "#"+ id + " .holder";
-    new_filter_timestamp = "#"+ id + " .timestamp";
-    $(new_filter_timestamp).hide();
+    new_filter_holder = "#"+ id + " .holder";      
     $(new_filter_holder).show();
   }).live("mouseleave",function(){
-    $(".holder").hide();
-    $(".timestamp").show();
+    $(".holder").hide();    
   });
 
   $(".rt").live("click",function(data){
@@ -136,7 +130,7 @@
       document.getElementById("loading").style.display="none";
       if($("#msg .piece:last-child .messages")[0]!=undefined)
       {
-        $("#msg .piece:last-child .messages")[0].parentElement.style.height=$("#msg .piece:last-child .messages").height()+"px";
+        $("#msg .piece:last-child .messages")[0].parentElement.style.height=$("#msg .piece:last-child .messages").height()+20+"px";
         $("#msg .piece:last-child .messages")[0].scrollIntoView();
       }
       $('textarea').focus();
@@ -165,8 +159,7 @@
     float: left;
     margin: 0px 1% 0px 0px;
     text-align: right;
-    word-wrap: break-word;
-    padding-top: 5px;    
+    word-wrap: break-word;      
   }
   .messages
   {

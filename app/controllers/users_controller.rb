@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   	@user = User.find params[:id]
     @user.weibo_id = params[:user][:weibo_id]
     @user.website = params[:user][:website]
-    @user.email = params[:user][:email]
+    #@user.email = params[:user][:email]
     @user.facebook_id = params[:user][:facebook_id]
     @user.twitter_id = params[:user][:twitter_id]
     @user.github_id = params[:user][:github_id]

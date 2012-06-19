@@ -30,7 +30,15 @@ class MessagesController < ApplicationController
             User.find(u_id).notifications.where(:message_id => @msg.id, :read => false).first.update_attributes(:read => true)
           end
         end             
-        Juggernaut.publish(@msg.room_id, { :user_id => user_id, :username => username, :msg_id => @msg.id, :msg => @msg.body_html.html_safe, :timestamp => @msg.created_at.strftime("%H:%M"), :online => users_online, :notify_users => @msg.mentioned_user_ids })
+        Juggernaut.publish(@msg.room_id, { :user_id => user_id, 
+          :username => username, 
+          :msg_id => @msg.id, 
+          :msg => @msg.body_html.html_safe, 
+          :timestamp => @msg.created_at.strftime("%H:%M:%S %Y-%m-%d"), 
+          :online => users_online, 
+          :notify_users => @msg.mentioned_user_ids,
+          :user_avatar => "<img height='50' width='50' src='#{current_user.gravatar_url}'>" 
+          })
       end
       render :text => "ok"
     else
