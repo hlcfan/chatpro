@@ -9,7 +9,8 @@ Chatpro::Application.routes.draw do
   resources :messages
   
   resources :rooms  
-  resources :users
+  resources :users 
+
   resources :tools do #, :only => [:index]
     collection do
       get :user_list
@@ -33,6 +34,7 @@ Chatpro::Application.routes.draw do
   match "/rooms/:id/unfav" => 'users#unfav_room'
   post "/goto" => 'rooms#goto'
   match "/tools/msg" => 'tools#show_msg'
+  post "/update_password" => "users#update_password"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

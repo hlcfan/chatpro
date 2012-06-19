@@ -14,7 +14,7 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
          
-  attr_accessor :login
+  attr_accessor :login, :password_confirmation
   
   attr_accessible :login, :username, :email, :password, :password_confirmation
          
@@ -31,6 +31,7 @@ class User
   field :intro, :type => String , :default => ""
   field :custom_ids, :type => Array, :default => []
   
+  #field :password_flag, :type => String, :default => "1" # 1 => set, 0 => not set
   field :encrypted_password, :type => String, :null => false, :default => ""
 
   ## Recoverable
@@ -47,7 +48,6 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
   field :online_status, :type => Integer, :default => 0
-
   
   field :location
   field :location_id, :type => Integer
@@ -112,6 +112,15 @@ class User
     authorizations.create(:provider => provider , :uid => uid )
   end
     
+  def update_with_password(params={})
+    if !params[:current_password].blank? or !params[:password].blank? or !params[:password_confirmation].blank?
+      super
+    else
+      params.delete(:current_password)
+      self.update_without_password(params)
+    end
+  end
+  
   ## Encryptable
   # field :password_salt, :type => String
 

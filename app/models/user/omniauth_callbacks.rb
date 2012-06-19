@@ -45,6 +45,7 @@ class User
         user.password = Devise.friendly_token[0, 20]
         user.location = data["location"]
         user.intro = data["description"]
+        #user.password_flag = "0"  for some reason
       end
     end
   end

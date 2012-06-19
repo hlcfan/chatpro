@@ -35,23 +35,22 @@
 }
 .user_setting .right .about-me 
 {
-	padding: 10px;
+	padding: 5px 10px 0 10px;
 	font-size: 12px;
 	background-color: #F8F8F8;		
 	border-bottom: 1px solid #EEE;
-	line-height: 1.3;
-	min-height:400px;
+	line-height: 1.3;	
 }
-.user_setting .left table
+.user_setting table, .advanced table
 {
 	font-size:1.2em;
 }
-.user_setting .left table td
+.user_setting table td, .advanced table td
 {
 	padding:0 50px 0 0;
 	padding-top:5px;
 }
-.user_setting .left table tr
+.user_setting table tr, .advanced table tr
 {
 	height:35px;
 }
@@ -173,4 +172,8 @@ i.timestamp_icon
 .messages .highlight
 {
 	width:95%;
+}
+.fl
+{
+	float:left;
 }

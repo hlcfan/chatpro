@@ -1,10 +1,12 @@
 .user_setting
-	%h1{:style => "border-bottom:1px solid #ccc;"}
-		= link_to @user.username, user_path(@user)
-		> Edit	
+	%h1{:style => "border-bottom:1px solid #ccc;"}		
+		Basic Settings
+
 	.avatar
 		=image_tag(@user.gravatar_url, :width => "120", :height => "120")
-	= form_for(@user) do |f|	
+		%h3
+			= link_to @user.username, user_path(@user), {:style => "display:block;width:80%;padding:0 20px;"}
+	= form_for(@user) do |f|
 		.left
 			%table
 				%tr
@@ -50,8 +52,31 @@
 		.right
 			.about-me 
 				= f.text_area :intro
-		.form-actions{:style => "float:left;padding: 17px 0 18px 20px;width:98.5%;"}
-			= f.submit "Save Profile", :class => "btn btn-large"
+		.form-actions{:style => "float:left;padding: 17px 20px 18px 20px;width:96.5%;"}
+			= f.submit "Save Profile", :class => "btn btn-large btn-success"			
+
+	%h1{:style => "border-bottom:1px solid #ccc;float:left;width:100%;"}		
+		Advanced Settings
+	.advanced{:class => "fl"}
+		%h3
+			Password
+		= form_tag("/update_password", :method => "post", :id => "update_password") do
+			%table
+				/ - if current_user.password_flag =="1"
+				/ 	%tr
+				/ 		%td= label_tag :Current_Password
+				/ 		%td= password_field_tag "user[current_password]"
+				%tr
+					%td
+						= label_tag :Password
+					%td
+						= password_field_tag "user[password]"
+				%tr
+					%td				
+						= label_tag :Password_Confirmation
+					%td
+						= password_field_tag "user[password_confirmation]"				
+			= submit_tag "Update Password", :class => "btn btn-success"			
 
 :css
 	.avatar
@@ -63,7 +88,7 @@
 		width:98%;
 		height:100%;
 	}
-	.user_setting .left table td {
+	.user_setting table td, .advanced table td{
 		padding: 0 20px 0 0;
 		padding-top: 5px;
-	}
+	}	
