@@ -8,7 +8,7 @@ module ApplicationHelper
   end
   
   def meta_helper
-    @meta_desc || "ChatPro,Instant Talk For IT People"
+    @meta_desc || "ChatPro - Talk Anytime Anywhere"
   end
 
   # def wicked_pdf_stylesheet_link_tag(*sources)

@@ -177,3 +177,7 @@ i.timestamp_icon
 {
 	float:left;
 }
+.thumbnails
+{
+  margin-left: 0!important;
+}
