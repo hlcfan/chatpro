@@ -12,7 +12,7 @@ class User
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:weibo, :google]
          
   attr_accessor :login, :password_confirmation
   
@@ -20,7 +20,7 @@ class User
          
   ## Database authenticatable
   field :username, :type => String, :null => false
-  field :email,              :type => String, :null => false, :default => ""
+  field :email,              :type => String, :default => "" #, :null => false
   field :twitter_id, :type => String, :default => "" 
   field :facebook_id, :type => String, :default => ""
   field :github_id, :type => String, :default => ""

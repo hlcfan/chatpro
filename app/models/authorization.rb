@@ -10,5 +10,13 @@ class Authorization
 
   validates_presence_of :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider  
+
+  def self.create_from_hash(user_id, omniauth)
+    self.create!(      
+      provider:     omniauth.provider,
+      uid:          omniauth.uid,
+      access_token: omniauth.credentials.token
+    )
+  end
 end
 

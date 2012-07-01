@@ -1,7 +1,9 @@
 require 'omniauth-openid'
 require 'openid/store/filesystem'
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -230,4 +232,7 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+
+config.omniauth :weibo, "2853851567", "249ae4ac6cb3bf18f70e234597a32721"
 end
+

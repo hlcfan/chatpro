@@ -26,6 +26,15 @@ Chatpro::Application.routes.draw do
   
   resources :words
 
+  # resources :auth, :only => [:weibo] do
+  #   collection do
+  #     get :weibo
+  #     get :callback
+  #     get :logout
+  #   end
+  # end
+
+
   match "/leave/:room_id" => 'rooms#leave'
   get "/goto/:id" => 'rooms#goto'
   match "/verify" => 'rooms#verify'
