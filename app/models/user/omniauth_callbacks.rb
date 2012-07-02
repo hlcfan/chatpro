@@ -1,7 +1,7 @@
 # coding: utf-8
 class User
   module OmniauthCallbacks
-    ["github","google","twitter","douban"].each do |provider|
+    ["github","google","twitter","douban","weibo"].each do |provider|
       define_method "find_or_create_for_#{provider}" do |response|
         uid = response["uid"]
         data = response["info"]
