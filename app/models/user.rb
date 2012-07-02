@@ -16,11 +16,11 @@ class User
          
   attr_accessor :login, :password_confirmation
   
-  attr_accessible :login, :username, :email, :password, :password_confirmation
+  attr_accessible :login, :username, :password, :password_confirmation
          
   ## Database authenticatable
   field :username, :type => String, :null => false
-  field :email,              :type => String, :default => "" #, :null => false
+  field :email,              :type => String, :default => "", :null => true
   field :twitter_id, :type => String, :default => "" 
   field :facebook_id, :type => String, :default => ""
   field :github_id, :type => String, :default => ""
@@ -86,7 +86,7 @@ class User
 
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
-    self.any_of({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i }).first
+    self.any_of({ :username =>  /^#{Regexp.escape(login)}$/i }).first
   end
   
   def self.find_for_open_id(access_token, signed_in_resource=nil)
@@ -100,6 +100,10 @@ class User
 
   def self.find_by_email(email)
     where(:email => email).first
+  end
+
+  def self.find_by_username(username)
+    where(:username => username).first
   end
 
   def bind?(provider)
@@ -121,6 +125,9 @@ class User
     end
   end
   
+  def email_required?
+    false
+  end
   ## Encryptable
   # field :password_salt, :type => String
 

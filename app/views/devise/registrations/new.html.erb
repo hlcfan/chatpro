@@ -4,13 +4,15 @@
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-  <div><%= f.label :UserName%></div>
+  
   <div><%= f.text_field :username, :class => "input-xlarge", :placeholder => "UserName" %></div>
-  <div><%= f.label :Email%></div>
+  
+  
   <div><%= f.email_field :email, :class => "input-xlarge", :placeholder => "Email" %></div>
-  <div><%= f.label :Password%></div>
+  
+  
   <div><%= f.password_field :password, :class => "input-xlarge", :placeholder => "Password" %></div>
-  <div><%= f.label :Password_Confirmation%></div>
+  
   <div><%= f.password_field :password_confirmation, :class => "input-xlarge", :placeholder => "Password Confirmation" %></div>
 
   <div><%= f.submit "Sign up", :class => "btn btn-large btn-success" %></div>

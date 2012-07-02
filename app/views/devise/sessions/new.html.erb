@@ -3,9 +3,9 @@
 <h2>Sign in/<%= link_to "Sign up",new_user_registration_path %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :Email%></div>
-  <div><%= f.text_field :login, :class => "input-xlarge", :placeholder => "Email" %></div>
-  <div><%= f.label :Password%></div>
+  
+  <div><%= f.text_field :login, :class => "input-xlarge", :placeholder => "Username" %></div>
+  
   <div><%= f.password_field :password, :class => "input-xlarge", :placeholder => "Password" %></div>
 
   <% if devise_mapping.rememberable? -%>
