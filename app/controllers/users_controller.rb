@@ -13,10 +13,11 @@ class UsersController < ApplicationController
 
   def edit
     if current_user.id.eql?(params[:id])
-      @user = User.find params[:id]         
+      @user = User.find params[:id]       
     else
       @user = current_user
     end
+    @title = "Edit Settings - #{current_user.username}"      
   end
   
   def update

@@ -3,15 +3,15 @@ class RoomsController < ApplicationController
   before_filter :authenticate_user!
   def index
     @rooms = Room.all.order(:active_date, :desc)#.to_a
-    @title = "ChatPro - Talk Around IT"
+    @title = "ChatPro - Talk Anytime Anywhere"
     #reset_session
   end
   
   def show
     @room = Room.find(params[:id])
-    @title = @room.name
+    @title = "#{@room.name} | ChatPro"
     @meta_desc = @room.desc[0,100]
-    @room_url = room_url
+    @room_url = room_url    
     if session["#{params[:id]}_#{current_user.email}"] == 1 || @room.password.nil? || @room.password == ""
       @msgs = @room.messages.order(:_id => :desc).paginate(:page => params[:page], :per_page => 60)
       #@page = @room.messages.length/20 + 1 
