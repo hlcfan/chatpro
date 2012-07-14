@@ -28,7 +28,7 @@ class User
     def new_from_provider_data(provider, uid, data)
       User.new do |user|
         user.email = data["email"]
-        user.weibo_id = data['name']
+        user.weibo_id = data['name'] if provider == "weibo"
         #user.email = "twitter+#{uid}@example.com" if provider == "twitter"
         #user.email = "douban+#{uid}@example.com" if provider == "douban"
         user.username = data['name']
