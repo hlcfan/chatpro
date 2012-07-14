@@ -194,3 +194,11 @@ i.timestamp_icon
 	font-size: 18px;
 	line-height: 1.3;
 }
+.thumbnails > li
+{	
+	margin: 0 0 18px 18px !important;
+}
+.thumbnails li:first-child
+{
+	margin-left:0 !important;
+}
