@@ -12,15 +12,15 @@ class User
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:weibo, :google]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:weibo, :google,:twitter]
          
   attr_accessor :login, :password_confirmation
   
-  attr_accessible :login, :username, :password, :password_confirmation
+  attr_accessible :login, :username, :email, :password, :password_confirmation
          
   ## Database authenticatable
   field :username, :type => String, :null => false
-  field :email,              :type => String, :default => "", :null => true
+  field :email,              :type => String, :default => "", :null => false
   field :twitter_id, :type => String, :default => "" 
   field :facebook_id, :type => String, :default => ""
   field :github_id, :type => String, :default => ""
@@ -86,7 +86,7 @@ class User
 
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
-    self.any_of({ :username =>  /^#{Regexp.escape(login)}$/i }).first
+    self.any_of({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i }).first
   end
   
   def self.find_for_open_id(access_token, signed_in_resource=nil)

@@ -234,5 +234,7 @@ Devise.setup do |config|
   # end
 
 config.omniauth :weibo, "2853851567", "249ae4ac6cb3bf18f70e234597a32721"
+
+config.omniauth :twitter, "16FZ4s0TVqPXouVquq11rw", "Aw52VoWHPT9ssJTUpNQV0by75FGOWKbSHT9SAOOA0"
 end
 

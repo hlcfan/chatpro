@@ -11,7 +11,7 @@
 						Website:
 					%td
 						#{@user.website}
-			- unless @user.email.empty?					
+			- unless @user.email.nil?					
 				%tr
 					%td
 						Email:
