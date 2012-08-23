@@ -7,6 +7,7 @@ gem "rails_autolink", ">= 1.0.4"
 gem 'gravtastic'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+
 # Mongoid 辅助插件
 gem "mongoid", "~> 2.4"
 gem "bson_ext", "~> 1.5"
