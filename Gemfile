@@ -21,13 +21,13 @@ gem 'will_paginate_mongoid', '~> 1.0.2'
 gem 'bootstrap-will_paginate'
 
 # 三方平台 OAuth 验证登陆
-gem "omniauth", "~> 1.0.1"
+gem "omniauth"
 gem 'omniauth-openid', "~> 1.0.1"
 gem "omniauth-weibo-oauth2"
 
 #gem "omniauth-github", "~> 1.0.0"
 #gem "omniauth-twitter", "~> 0.0.7"
-#gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
+gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
 
 # Markdown 格式
 gem 'redcarpet'

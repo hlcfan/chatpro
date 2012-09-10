@@ -233,6 +233,10 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 
-config.omniauth :weibo, "2853851567", "249ae4ac6cb3bf18f70e234597a32721"
+api_config = YAML::load(File.open("#{Rails.root}/config/config.yml"))
+
+config.omniauth :weibo, api_config['defaults']['weibo_api_key'], api_config['defaults']['weibo_secret']
+
+config.omniauth :douban, api_config['defaults']['douban_api_key'], api_config['defaults']['douban_secret']
 end
 

@@ -10,8 +10,8 @@
  *
  *= require_self
  *= require_tree .
- *= require bootstrap
- *= require responsive
+ *= require twitter/bootstrap
+ *= require twitter/bootstrap-responsive
  *= require jquery.atwho
 */
 

@@ -13,8 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require bootstrap-modal
-//= require bootstrap-dropdown
-//= require bootstrap-alert
+//= require twitter/bootstrap/alert
+//= require twitter/bootstrap/modal
+//= require twitter/bootstrap/dropdown
 //= require jquery.atwho
 //= require jquery.textarea
