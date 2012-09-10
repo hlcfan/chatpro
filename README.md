@@ -1,2 +1,3 @@
-== Chat Pro
-** Currently No Readme Info**
+### ChatPro - A Fashionable Chat Room
+
+**Currently Deploy at [ChatPro](http://hlcfan.tk)**

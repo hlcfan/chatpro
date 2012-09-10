@@ -21,4 +21,8 @@ public/assets/
 vendor/bundle/
 public/profile/
 public/warcraft/
+public/openvpn/
+public/app_store/
 config/config.yml
+Gemfile.lock
+

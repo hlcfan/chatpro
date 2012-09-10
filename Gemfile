@@ -7,6 +7,7 @@ gem "rails_autolink", ">= 1.0.4"
 gem 'gravtastic'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+
 # Mongoid 辅助插件
 gem "mongoid", "~> 2.4"
 gem "bson_ext", "~> 1.5"
@@ -20,13 +21,14 @@ gem 'will_paginate_mongoid', '~> 1.0.2'
 gem 'bootstrap-will_paginate'
 
 # 三方平台 OAuth 验证登陆
-gem "omniauth", "~> 1.0.1"
+gem "omniauth"
 gem 'omniauth-openid', "~> 1.0.1"
 gem "omniauth-weibo-oauth2"
 gem 'omniauth-twitter'
 
 #gem "omniauth-github", "~> 1.0.0"
-#gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
+#gem "omniauth-twitter", "~> 0.0.7"
+gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
 
 # Markdown 格式
 gem 'redcarpet'

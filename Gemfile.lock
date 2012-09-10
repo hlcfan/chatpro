@@ -1,16 +1,25 @@
 GIT
   remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 028a81746f1f8958df59dfb068d57f2932ef767d
+  revision: 9182e777aafb258f3741ff82f0672d33245de48d
   specs:
-    anjlab-bootstrap-rails (2.0.2.1)
+    anjlab-bootstrap-rails (2.1.0.0)
       railties (>= 3.0)
       sass
 
 GIT
-  remote: git://github.com/ichord/jquery-atwho-rails.git
-  revision: cb243b002bb5f2758496c2dd03741ce7fbb05f8d
+  remote: git://github.com/ballantyne/omniauth-douban.git
+  revision: e3173ec1aa0c8572def6f696e5b2f8dadc7fa834
   specs:
-    jquery-atwho-rails (0.1.5)
+    omniauth-douban (1.0.1)
+      multi_json
+      omniauth (~> 1.1.0)
+      omniauth-oauth (~> 1.0.1)
+
+GIT
+  remote: git://github.com/ichord/jquery-atwho-rails.git
+  revision: ceda350c26718fee539ad6c61be97acc82dd001c
+  specs:
+    jquery-atwho-rails (0.1.6)
 
 GEM
   remote: http://rubygems.org/
@@ -47,9 +56,9 @@ GEM
     blankslate (2.1.2.4)
     bootstrap-will_paginate (0.0.7)
       will_paginate
-    bson (1.6.2)
-    bson_ext (1.6.2)
-      bson (~> 1.6.2)
+    bson (1.6.4)
+    bson_ext (1.6.4)
+      bson (~> 1.6.4)
     builder (3.0.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -57,44 +66,46 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.3.1)
-    devise (2.0.4)
+    coffee-script-source (1.3.3)
+    devise (2.1.2)
       bcrypt-ruby (~> 3.0)
-      orm_adapter (~> 0.0.3)
+      orm_adapter (~> 0.1)
       railties (~> 3.1)
-      warden (~> 1.1.1)
+      warden (~> 1.2.1)
     erubis (2.7.0)
-    execjs (1.3.0)
+    execjs (1.4.0)
       multi_json (~> 1.0)
-    faraday (0.8.1)
+    faraday (0.8.4)
       multipart-post (~> 1.1)
     ffi (1.0.11)
     gravtastic (3.2.6)
-    haml (3.1.4)
+    haml (3.1.7)
     hashie (1.2.0)
     hike (1.2.1)
     hpricot (0.8.6)
     httpauth (0.1)
     i18n (0.6.0)
-    journey (1.0.3)
-    jquery-rails (2.0.2)
-      railties (>= 3.2.0, < 5.0)
+    journey (1.0.4)
+    jquery-rails (2.1.1)
+      railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
-    json (1.6.6)
+    json (1.7.5)
     juggernaut (2.1.1)
       redis
+    jwt (0.1.5)
+      multi_json (>= 1.0)
     libv8 (3.3.10.4)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.18)
+    mime-types (1.19)
     mongo (1.6.2)
       bson (~> 1.6.2)
     mongo-rails-instrumentation (0.2.4)
-    mongoid (2.4.8)
+    mongoid (2.4.12)
       activemodel (~> 3.1)
-      mongo (~> 1.3)
+      mongo (<= 1.6.2)
       tzinfo (~> 0.3.22)
     mongoid_auto_increment_id (0.4.0)
       mongoid (~> 2.4.0)
@@ -103,21 +114,33 @@ GEM
       bundler (>= 1.0.0)
       rails (>= 3.0.0)
       railties (>= 3.0.0)
-    multi_json (1.3.2)
+    multi_json (1.3.6)
     multipart-post (1.1.5)
     oauth (0.4.6)
+<<<<<<< HEAD
     oauth2 (0.6.1)
       faraday (~> 0.7)
+=======
+    oauth2 (0.8.0)
+      faraday (~> 0.8)
+>>>>>>> 349cb51ed95b7637266c4ad1b09f071e7eb23972
       httpauth (~> 0.1)
-      multi_json (~> 1.3)
-    omniauth (1.0.3)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
+    omniauth (1.1.0)
       hashie (~> 1.2)
       rack
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
+<<<<<<< HEAD
     omniauth-oauth2 (1.0.2)
       oauth2 (~> 0.6.0)
+=======
+    omniauth-oauth2 (1.1.0)
+      oauth2 (~> 0.8.0)
+>>>>>>> 349cb51ed95b7637266c4ad1b09f071e7eb23972
       omniauth (~> 1.0)
     omniauth-openid (1.0.1)
       omniauth (~> 1.0)
@@ -128,9 +151,9 @@ GEM
     omniauth-weibo-oauth2 (0.2.0)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
-    orm_adapter (0.0.7)
+    orm_adapter (0.4.0)
     polyglot (0.3.3)
-    pygments.rb (0.2.11)
+    pygments.rb (0.2.13)
       rubypython (~> 0.5.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -152,7 +175,7 @@ GEM
       railties (= 3.2.2)
     rails-i18n (0.1.8)
       i18n (~> 0.5)
-    rails_autolink (1.0.6)
+    rails_autolink (1.0.9)
       rails (~> 3.1)
     railties (3.2.2)
       actionpack (= 3.2.2)
@@ -165,21 +188,21 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redcarpet (2.1.1)
-    redis (2.2.2)
-    ruby-openid (2.1.8)
+    redis (3.0.1)
+    ruby-openid (2.2.0)
     rubypython (0.5.3)
       blankslate (>= 2.1.2.3)
       ffi (~> 1.0.7)
-    sass (3.1.15)
+    sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    sprockets (2.1.2)
+    sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    therubyracer (0.10.1)
+    therubyracer (0.10.2)
       libv8 (~> 3.3.10)
     thor (0.14.6)
     tilt (1.3.3)
@@ -187,10 +210,10 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.33)
-    uglifier (1.2.4)
+    uglifier (1.2.7)
       execjs (>= 0.3.0)
-      multi_json (>= 1.0.2)
-    warden (1.1.1)
+      multi_json (~> 1.3)
+    warden (1.2.1)
       rack (>= 1.0)
     wicked_pdf (0.7.9)
     will_paginate (3.0.3)
@@ -218,7 +241,8 @@ DEPENDENCIES
   mongoid (~> 2.4)
   mongoid_auto_increment_id (= 0.4.0)
   mongoid_rails_migrations (~> 0.0.14)
-  omniauth (~> 1.0.1)
+  omniauth
+  omniauth-douban!
   omniauth-openid (~> 1.0.1)
   omniauth-twitter
   omniauth-weibo-oauth2
