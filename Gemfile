@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.2'
+gem 'rails'
 gem "rails-i18n","0.1.8"
 gem 'jquery-rails'
 gem "rails_autolink", ">= 1.0.4"
@@ -24,12 +24,10 @@ gem 'bootstrap-will_paginate'
 gem "omniauth"
 gem 'omniauth-openid', "~> 1.0.1"
 gem "omniauth-weibo-oauth2"
-gem 'omniauth-twitter'
 
 #gem "omniauth-github", "~> 1.0.0"
 #gem "omniauth-twitter", "~> 0.0.7"
-gem "omniauth-douban", :git => "git://github.com/ballantyne/omniauth-douban.git"
-
+gem "omniauth-douban-oauth2"
 # Markdown 格式
 gem 'redcarpet'
 gem 'hpricot', '~> 0.8.5'
@@ -70,3 +68,4 @@ gem 'therubyracer'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
