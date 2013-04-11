@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails'
-gem "rails-i18n","0.1.8"
+gem "rails-i18n"
 gem 'jquery-rails'
 gem "rails_autolink", ">= 1.0.4"
 gem 'gravtastic'
@@ -11,9 +11,9 @@ gem 'gravtastic'
 # Mongoid 辅助插件
 gem "mongoid", "~> 2.4"
 gem "bson_ext", "~> 1.5"
-gem 'mongo-rails-instrumentation','0.2.4'
-gem 'mongoid_auto_increment_id', "0.4.0"
-gem 'mongoid_rails_migrations', '~> 0.0.14'
+gem 'mongo-rails-instrumentation'
+gem 'mongoid_auto_increment_id'
+gem 'mongoid_rails_migrations'
 
 # 分页
 gem 'will_paginate'
@@ -24,6 +24,7 @@ gem 'bootstrap-will_paginate'
 gem "omniauth"
 gem 'omniauth-openid', "~> 1.0.1"
 gem "omniauth-weibo-oauth2"
+gem 'omniauth-tqq-oauth2'
 
 #gem "omniauth-github", "~> 1.0.0"
 #gem "omniauth-twitter", "~> 0.0.7"
