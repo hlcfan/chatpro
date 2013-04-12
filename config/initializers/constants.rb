@@ -7,5 +7,5 @@ case ENV['RAILS_ENV']
   when "development"
     JUGGERNAUT_SERVER = UDPSocket.open {|s| s.connect("64.233.187.99", 1); s.addr.last}
   when "production"  
-    JUGGERNAUT_SERVER = "106.187.94.74"
+    JUGGERNAUT_SERVER = "106.187.88.60"
 end
