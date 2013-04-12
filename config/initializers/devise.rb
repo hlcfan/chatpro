@@ -232,5 +232,7 @@ Devise.setup do |config|
   config.omniauth :weibo, api_config['defaults']['weibo_api_key'], api_config['defaults']['weibo_secret']
 
   config.omniauth :douban, api_config['defaults']['douban_api_key'], api_config['defaults']['douban_secret']
+
+  config.omniauth :tqq2, api_config['defaults']['qq_api_key'], api_config['defaults']['qq_secret']
 end
 
