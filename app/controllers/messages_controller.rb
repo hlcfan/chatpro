@@ -48,15 +48,18 @@ class MessagesController < ApplicationController
 
   def share
     @msg = Message.find(params[:msg_id])
-    # unless msg.vote_user_ids.include?(current_user.id)
-    #   msg.vote_users << current_user
-    #   current_user.vote_message_ids << msg.id
-    #   current_user.save
-    #   msg.save
-    #   render :js => "alert('thx,man')"
-    # else
-    #   render :js => "alert('you have voted,man')"
-    # end    
+  end
+
+  def tencent_share
+    @msg = Message.find(params[:id])
+    begin
+      tencent = Tqq_2::Tweet.new(current_user.auth_token, current_user.openid)
+      text = Nokogiri::HTML(@msg.body).text
+      tencent.add("#{@msg.user.username}:#{text} - #{@msg.room.name} http://hlcfan.tk/rooms/#{@msg.room.id}")
+      render :js => "$('#edit_form').modal('hide')"
+    rescue Exception => e
+      logger.error "Tencent Weibo Share Error #{e.backtrace}"      
+    end
   end
 
   def destroy

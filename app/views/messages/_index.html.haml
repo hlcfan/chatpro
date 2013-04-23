@@ -12,13 +12,15 @@
         .messages.mine{:id => "#{msg.id}" }
           = raw(msg.body_html)
           .holder
-            %a{:href => "/share/#{msg.id}", "data-remote" => "true", :class => "share"} ❤
+            %a{:href => "/share/#{msg.id}", "data-remote" => "true", :class => "share"}
+              %i{:class => 'icon-share'}
             %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} Re          
       - else
         .messages{:id => "#{msg.id}" }
           = raw(msg.body_html)
           .holder
-            %a{:href => "/share/#{msg.id}", "data-remote" => "true", :class => "share"} ❤
+            %a{:href => "/share/#{msg.id}", "data-remote" => "true", :class => "share"}
+              %i{:class => 'icon-share'}
             %a{:href => "javascript:void(0)", :class => "rt", :id => "#{msg.user.username}"} Re          
 #input-area{:style => "background-color:#E0E0E0;position:fixed;bottom:0;left:0;width: 100%;height: 100px;"}
   %table
@@ -57,7 +59,7 @@
     online_users = data["online"];
     console.log("Now Online_Users:" + online_users);
 
-  $("textarea").atWho("@",{'data':window.online_users});  
+  $("textarea").atwho("@",{'data':online_users});  
     var flag = false;
     console.log(data["msg_id"] + "|" + data["notify_users"]);    
     for( i in data["notify_users"] )
@@ -70,14 +72,14 @@
     if(data["username"]=="#{current_user.username}")
     {
       $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "' class='signature' target='_blank' >"+ data["user_avatar"] + "</a>" + "<div class='info_bar'>" + "<b>" + data["username"] + "</b>&nbsp;" + data["timestamp"] + "</div>" + "<div class='messages mine' id=" + data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
-      "<a href='/share/" + data["msg_id"] + "' data-remote='true' class='share'>❤</a>" +
+      "<a href='/share/" + data["msg_id"] + "' data-remote='true' class='share'><i class='icon-share'></i></a>" +
       "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;Re</a></div>" +      
       "</div>" + "</div>");        
     }
     else if(flag == true)
     {                     
       $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "' class='signature' target='_blank'>"+ data["user_avatar"] + "</a>" + "<div class='info_bar'>" + "<b>" + data["username"] + "</b>&nbsp;" + data["timestamp"] + "</div>" + "<div class='messages mentioned' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
-      "<a href='/share/" + data["msg_id"]+ "' data-remote='true' class='share'>❤</a>" +
+      "<a href='/share/" + data["msg_id"]+ "' data-remote='true' class='share'><i class='icon-share'></i></a>" +
       "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;Re</a></div>" +      
       "</div>" + "</div>");     
       document.getElementById("mp3").play();
@@ -85,7 +87,7 @@
     else
     {
       $("#msg").append("<div class='piece'>" + "<a href='/users/" + data["user_id"] + "'class='signature' target='_blank'>"+ data["user_avatar"] + "</a>" + "<div class='info_bar'>" + "<b>" + data["username"] + "</b>&nbsp;" + data["timestamp"] + "</div>" + "<div class='messages' id="+ data["msg_id"] + ">" + data["msg"] + "<div class='holder'>" +
-      "<a href='/share/" + data["msg_id"]+ "' data-remote='true' class='share'>❤</a>" +
+      "<a href='/share/" + data["msg_id"]+ "' data-remote='true' class='share'><i class='icon-share'></i></a>" +
       "<a href='javascript:void(0)'' class='rt' id=" + data["username"] + ">&nbsp;Re</a></div>" +      
       "</div>" + "</div>");
     }
@@ -95,8 +97,7 @@
       $('#message_body').val('');
     }    
   });   
-
-  $("textarea").atWho("@",{'data':window.online_users});  
+  
 
   $("#message_body").keypress(function(e)    
   {    
@@ -106,15 +107,16 @@
     }
   });  
 
-  $(".messages").live("hover",function(){     
-    id = $(this).attr("id");    
-    new_filter_holder = "#"+ id + " .holder";      
-    $(new_filter_holder).show();
-  }).live("mouseleave",function(){
-    $(".holder").hide();    
-  });
+  $(".messages").on("mouseenter", function(){     
+      id = $(this).attr("id");    
+      new_filter_holder = "#"+ id + " .holder";      
+      $(new_filter_holder).show();
+    }).on("mouseleave", function(){
+      $(".holder").hide();      
+    }
+  );
 
-  $(".rt").live("click",function(data){
+  $(".rt").on("click",function(data){
     id = $(this).attr("id")
     var content = $("textarea").val();
     content += " " + "@"+id + " ";
@@ -123,7 +125,6 @@
     $("textarea").focus();
     $("textarea").val('');
     $("textarea").val(val);
-
   })
 
   $(document).ready(function(){
@@ -192,8 +193,7 @@
     position:absolute;
     right:0;
     top:5px;
-    z-index: 1;
-    width:34px;    
+    z-index: 1;      
     height:25px;
     display:none;
   }

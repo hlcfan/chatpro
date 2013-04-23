@@ -5,15 +5,25 @@ class User
       define_method "find_or_create_for_#{provider}" do |response|
         uid = response["uid"]
         data = response["info"]
-
+        credentials = response['credentials']
+        logger.info "======================#{credentials}"
+        auth_token = credentials.token
+        openid = credentials.openid || ""
         if user = User.where("authorizations.provider" => provider , "authorizations.uid" => uid).first
+          user.auth_token = auth_token
+          user.openid = openid
+          user.save(:validate => false)
           user
         elsif user = User.find_by_username(data["email"])
           user.bind_service(response)
+          user.auth_token = auth_token
+          user.openid = openid
+          user.save(:validate => false)
           user
         else
           user = User.new_from_provider_data(provider, uid, data)
-
+          user.auth_token = auth_token
+          user.openid = openid
           if user.save(:validate => false)
             user.authorizations << Authorization.new(:provider => provider, :uid => uid )
             return user
@@ -36,8 +46,7 @@ class User
 
         user.login = data["nickname"]
         user.login = data["name"] if provider == "google"
-        user.login.gsub!(/[^\w]/, "_")
-
+        user.login.gsub!(/[^\w]/, "_")        
         #user.github = data['nickname'] if provider == "github"
 
         if User.where(:login => user.login).count > 0 || user.login.blank?

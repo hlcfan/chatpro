@@ -53,7 +53,8 @@ gem 'wicked_pdf'
 
 gem 'execjs'
 gem 'therubyracer'
-
+gem 'tqq_2', :git => 'git://github.com/hlcfan/tqq_2.git'
+gem 'nokogiri'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
