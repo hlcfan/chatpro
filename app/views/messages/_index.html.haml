@@ -58,8 +58,7 @@
     console.log("Got data: " +data["username"] + "|" + data["msg"] + "#{current_user.username}");
     online_users = data["online"];
     console.log("Now Online_Users:" + online_users);
-
-  $("textarea").atwho("@",{'data':online_users});  
+  
     var flag = false;
     console.log(data["msg_id"] + "|" + data["notify_users"]);    
     for( i in data["notify_users"] )
@@ -98,7 +97,8 @@
     }    
   });   
   
-
+  $("textarea").atwho("@",{'data':online_users});  
+  
   $("#message_body").keypress(function(e)    
   {    
     if(e.which == 13 && !e.shiftKey)
