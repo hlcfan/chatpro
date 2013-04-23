@@ -11,12 +11,13 @@ class User
   cache
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:weibo, :google, :douban, :tqq2]
+  devise :database_authenticatable, :registerable, :token_authenticatable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:weibo, :google, :douban, :tqq2]         
          
   attr_accessor :login, :password_confirmation
   
-  attr_accessible :login, :username, :email, :password, :password_confirmation
+  attr_accessible :login, :username, :email, :password, :password_confirmation, 
+                  :authentication_token
          
   ## Database authenticatable
   field :username, :type => String, :null => false
@@ -89,9 +90,9 @@ class User
     self.any_of({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i }).first
   end
   
-  def self.find_for_open_id(access_token, signed_in_resource=nil)
+  def self.find_for_open_id(access_token, signed_in_resource=nil)        
     data = access_token.info
-    if user = User.where(:email => data["email"]).first
+    if user = User.where(:email => data["email"]).first      
       user
     else
       User.create!(:email => data["email"], :password => Devise.friendly_token[0,20])
@@ -127,7 +128,8 @@ class User
   
   def email_required?
     false
-  end
+  end 
+
   ## Encryptable
   # field :password_salt, :type => String
 
@@ -143,5 +145,6 @@ class User
   # field :locked_at,       :type => Time
 
   ## Token authenticatable
-  # field :authentication_token, :type => String
+  field :auth_token, :type => String
+  field :openid, :type => String
 end

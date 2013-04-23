@@ -6,7 +6,11 @@ Chatpro::Application.routes.draw do
     get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   end
   
-  resources :messages
+  resources :messages do 
+    collection do 
+      post :tencent_share
+    end
+  end
   
   resources :rooms  
   resources :users 

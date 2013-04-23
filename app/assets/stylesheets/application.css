@@ -142,6 +142,7 @@ i.timestamp_icon
 	font-weight:600;
 	font-size:2em;
 	margin-bottom:10px;
+	padding-bottom: 5px;
 }
 .hero-unit label
 {
