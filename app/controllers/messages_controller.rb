@@ -54,10 +54,10 @@ class MessagesController < ApplicationController
     @msg = Message.find(params[:id])
     begin
       tencent = Tqq_2::Tweet.new(current_user.auth_token, current_user.openid)
-      logger.info "=============Create Tqq_2 #{tencent}"
+      logger.info "=============Create Tqq_2 #{tencent.inspect}"
       text = Nokogiri::HTML(@msg.body).text
-      tencent.add("#{@msg.user.username}:#{text} - #{@msg.room.name} http://hlcfan.tk/rooms/#{@msg.room.id}")
-      logger.info "=============Share Tqq_2 Success!"
+      ret = tencent.add("#{@msg.user.username}:#{text} - #{@msg.room.name} http://hlcfan.tk/rooms/#{@msg.room.id}")
+      logger.info "=============Ret: #{ret}"
       render :js => "$('#edit_form').modal('hide')"
     rescue Exception => e
       logger.error "Tencent Weibo Share Error #{e.backtrace}"      
