@@ -5,7 +5,7 @@
   .modal-body
     #msg-body{:style => "font-weight:bold"}
       = raw(@msg.body_html)
-      = link_to image_tag("/assets/omniauth/tencent.png", :width => 30, :height => 30), "/messages/tencent_share?id=#{@msg.id}", :remote => true, :method => 'post'
+      = link_to image_tag("/images/omniauth/tencent.png", :width => 30, :height => 30), "/messages/tencent_share?id=#{@msg.id}", :remote => true, :method => 'post'
     / #jiathis_style_32x32
     /   %a.jiathis_button_tsina#tsina                
     /   %a.jiathis_button_douban   
