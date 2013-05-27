@@ -60,7 +60,7 @@ class MessagesController < ApplicationController
       logger.info "=============Ret: #{ret}"
       render :js => "$('#edit_form').modal('hide')"
     rescue Exception => e
-      logger.error "Tencent Weibo Share Error #{e.backtrace}"      
+      logger.error "Tencent Weibo Share Error #{e.backtrace}"
     end
   end
 

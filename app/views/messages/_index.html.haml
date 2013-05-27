@@ -95,8 +95,9 @@
     if(data["username"].indexOf(String("#{current_user.username}")) >= 0){
       $('#message_body').val('');
     }    
-  });   
-  
+  }); 
+
+  $("textarea").atwho("@",{'data':online_users});
   
   $("#message_body").keypress(function(e)    
   {    
