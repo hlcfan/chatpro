@@ -1,3 +1,4 @@
 ### ChatPro - A Fashionable Chat Room
+###### online chatting room app with Ruby on Rails
 
-**Currently Deploy at [ChatPro](http://hlcfan.tk)**
+# Too Shitty Code, forget'em
